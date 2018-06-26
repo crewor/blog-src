@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="google-site-verification" content="kCrgvlyWS5ndXM7nAKGHco11mv7Cx6vpxLq8bNZb7qo"/>
+  <meta charset="utf-8">
+  
+
+  
+  <title>通过代理实现spring bean的可动态替换 | CREWOR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="描述    遇到这样一个问题，有一个spring容器管理的一个实例对象A,然后A在很多 的类中都被引用了，当某一个时候，需要重新生成A对象，而不希望重新启动服务 的时候，就可以使用代理实现spring bean的可动态替换。具体实现方法参照下 文。 功能1. 通过代理实现spring bean的可动态替换。">
+<meta name="keywords" content="CREWOR,blog,李昆,study,学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过代理实现spring bean的可动态替换">
+<meta property="og:url" content="https://crewor.github.io/blog/2018/06/26/java/utils/spring/ModifiableSpringBean/index.html">
+<meta property="og:site_name" content="CREWOR">
+<meta property="og:description" content="描述    遇到这样一个问题，有一个spring容器管理的一个实例对象A,然后A在很多 的类中都被引用了，当某一个时候，需要重新生成A对象，而不希望重新启动服务 的时候，就可以使用代理实现spring bean的可动态替换。具体实现方法参照下 文。 功能1. 通过代理实现spring bean的可动态替换。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-26T06:13:55.931Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通过代理实现spring bean的可动态替换">
+<meta name="twitter:description" content="描述    遇到这样一个问题，有一个spring容器管理的一个实例对象A,然后A在很多 的类中都被引用了，当某一个时候，需要重新生成A对象，而不希望重新启动服务 的时候，就可以使用代理实现spring bean的可动态替换。具体实现方法参照下 文。 功能1. 通过代理实现spring bean的可动态替换。">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="CREWOR" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">CREWOR</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://crewor.github.io/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-java/utils/spring/ModifiableSpringBean" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2018/06/26/java/utils/spring/ModifiableSpringBean/" class="article-date">
+  <time datetime="2018-06-26T06:13:55.928Z" itemprop="datePublished">2018-06-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      通过代理实现spring bean的可动态替换
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><pre><code>    遇到这样一个问题，有一个spring容器管理的一个实例对象A,然后A在很多
+的类中都被引用了，当某一个时候，需要重新生成A对象，而不希望重新启动服务
+的时候，就可以使用代理实现spring bean的可动态替换。具体实现方法参照下
+文。
+</code></pre><h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><pre><code>1. 通过代理实现spring bean的可动态替换。
+</code></pre><a id="more"></a>
+<h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><pre><code>    通过实现spring的org.springframework.beans.factory.config.BeanPostProcessor接口，
+在spring bean（例如：A对象）初始化的时候返回A对象的代理对象PA，而代理对象PA可以动态修改实例A，
+从而实现不需要重新启动服务，只需要修改引用对象PA的代理对象A实例，即可进行动态修改。
+</code></pre><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><pre><code>/**
+ * 所有被代理对象都通过spring.ModifiableBean.Modifiable#setTarget(java.lang.Object)
+ * 方法进行实际对象的修改
+ */
+public interface Modifiable {
+
+    Object getTarget();
+
+    void setTarget(Object target);
+}
+
+
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
+
+import java.lang.reflect.Method;
+
+/**
+ * bean代理工具类型
+ */
+public class BeanProxyUtil {
+
+    /**
+     * 创建可以修改的代理对象
+     *
+     * @param targetObject
+     * @return
+     */
+    public static Object buildModifiableProxy(Object targetObject) {
+        try {
+            //增强器，动态代码生成器
+            Enhancer enhancer = new Enhancer();
+            enhancer.setCallback(new ModifiableInterceptor4Cglib(targetObject));
+            if (targetObject != null) {
+                enhancer.setSuperclass(targetObject.getClass());
+            }
+            enhancer.setInterfaces(new Class[]{Modifiable.class});
+            return enhancer.create();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 代理对象的执行策略
+     */
+    private static class ModifiableInterceptor4Cglib implements MethodInterceptor, Modifiable {
+        private Object target;
+
+        public ModifiableInterceptor4Cglib(Object target) {
+            this.target = target;
+        }
+
+        public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
+            if (method.equals(Modifiable.class.getDeclaredMethod(&quot;setTarget&quot;, Object.class))) {
+                setTarget(args[0]);
+            } else if (method.equals(Modifiable.class.getDeclaredMethod(&quot;getTarget&quot;))) {
+                return getTarget();
+            } else {
+                return method.invoke(target, args);
+            }
+            return null;
+        }
+
+        @Override
+        public Object getTarget() {
+            return target;
+        }
+
+        @Override
+        public void setTarget(Object target) {
+            this.target = target;
+        }
+    }
+}
+
+
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.core.PriorityOrdered;
+
+/**
+ *  通过实现spring的org.springframework.beans.factory.config.BeanPostProcessor接口，来进行
+ *  spring bean对象的增强，实现被代理对象的可动态替换。
+ *  spring.ModifiableBean.ModifiableSpringBeanPostProcess#needModifyClazzs 配置需要进行代理
+ *  增强的类型。只要是配置的类型实例，都会通过
+ *  spring.ModifiableBean.BeanProxyUtil#buildModifiableProxy(java.lang.Object) 方法返回对象
+ *  的代理对象，返回的对象实现了spring.ModifiableBean.Modifiable接口，通过
+ *  spring.ModifiableBean.Modifiable 接口方法进行动态修改被代理的对象
+ *
+ */
+@SuppressWarnings(&quot;unused&quot;)
+public class ModifiableSpringBeanPostProcess implements  BeanPostProcessor, PriorityOrdered {
+    private String[] holdFiles;
+    private Class[] needModifyClazzs ={};//这里配置要代理的类型
+
+    /**
+     *
+     * 是否是需要修改的类
+     * @param object
+     * @return
+     */
+    public boolean needModify(Object object) {
+        if(object==null||needModifyClazzs==null)
+            return false;
+        for(Class clazz:needModifyClazzs){
+            if(object.getClass().isAssignableFrom(clazz)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        return bean;
+    }
+
+
+    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        if (needModify(bean)) {
+            //注册beanDefine
+            //这里是代理的ConsumerBean ，代理成可以修改的
+            return BeanProxyUtil.buildModifiableProxy(bean);
+        }
+        return bean;
+    }
+    public int getOrder() {
+        return PriorityOrdered.HIGHEST_PRECEDENCE;
+    }
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://crewor.github.io/blog/2018/06/26/java/utils/spring/ModifiableSpringBean/" data-id="cjiva38nz00005omurp44xnx3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2018/06/21/java/utils/math/将数字转为汉字/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">将数字转为汉字</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2018/06/26/java/utils/spring/ModifiableSpringBean/">通过代理实现spring bean的可动态替换</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/06/21/java/utils/math/将数字转为汉字/">将数字转为汉字</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/06/21/question/nginx/faq/nginx_agent_faq1/">nginx反向代理重定向地址错误</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/06/20/java/utils/excel/ExcelExportUtil/">java Excel导出工具类</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 CREWOR<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+  <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
