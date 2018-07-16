@@ -81,3 +81,9 @@ deploy:
   type:
 sitemap:
 path: sitemap.xml
+
+
+
+livere:
+    on: true
+    livere_uid: MTAyMC8zODA5OS8xNDYyOQ==
