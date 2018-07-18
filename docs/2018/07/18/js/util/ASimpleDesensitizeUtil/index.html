@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="google-site-verification" content="kCrgvlyWS5ndXM7nAKGHco11mv7Cx6vpxLq8bNZb7qo"/>
+  <meta charset="utf-8">
+  
+
+  
+  <title>基于jquery实现的一种简易的页面脱敏工具 | CREWOR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="基于jquery实现的一种简易的页面脱敏工具,主要用来将页面明文用户名，联系方式进行脱敏，此工具使用了ES5中的Object.defineProperty方法进行实现，所以只有支持此特性的浏览器可以使用例如用户名: 李某某 ——&amp;gt; 李*某(点击查看) 联系方式: 15811111111 ——&amp;gt; 15*******11(点击查看)">
+<meta name="keywords" content="CREWOR,blog,李昆,study,学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于jquery实现的一种简易的页面脱敏工具">
+<meta property="og:url" content="https://crewor.github.io/blog/2018/07/18/js/util/ASimpleDesensitizeUtil/index.html">
+<meta property="og:site_name" content="CREWOR">
+<meta property="og:description" content="基于jquery实现的一种简易的页面脱敏工具,主要用来将页面明文用户名，联系方式进行脱敏，此工具使用了ES5中的Object.defineProperty方法进行实现，所以只有支持此特性的浏览器可以使用例如用户名: 李某某 ——&amp;gt; 李*某(点击查看) 联系方式: 15811111111 ——&amp;gt; 15*******11(点击查看)">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-18T02:33:12.870Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于jquery实现的一种简易的页面脱敏工具">
+<meta name="twitter:description" content="基于jquery实现的一种简易的页面脱敏工具,主要用来将页面明文用户名，联系方式进行脱敏，此工具使用了ES5中的Object.defineProperty方法进行实现，所以只有支持此特性的浏览器可以使用例如用户名: 李某某 ——&amp;gt; 李*某(点击查看) 联系方式: 15811111111 ——&amp;gt; 15*******11(点击查看)">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="CREWOR" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">CREWOR</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://crewor.github.io/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-js/util/ASimpleDesensitizeUtil" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2018/07/18/js/util/ASimpleDesensitizeUtil/" class="article-date">
+  <time datetime="2018-07-18T02:33:12.328Z" itemprop="datePublished">2018-07-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      基于jquery实现的一种简易的页面脱敏工具
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="基于实现的一种简易的页面脱敏工具-主要用来将页面明文用户名，联系方式进行脱敏，此工具使用了ES5中的方法进行实现，所以只有支持此特性的浏览器可以使用"><a href="#基于实现的一种简易的页面脱敏工具-主要用来将页面明文用户名，联系方式进行脱敏，此工具使用了ES5中的方法进行实现，所以只有支持此特性的浏览器可以使用" class="headerlink" title="基于实现的一种简易的页面脱敏工具,主要用来将页面明文用户名，联系方式进行脱敏，此工具使用了ES5中的方法进行实现，所以只有支持此特性的浏览器可以使用"></a>基于<a href="https://jquery.com" target="_blank" rel="noopener">jquery</a>实现的一种简易的页面脱敏工具,主要用来将页面明文用户名，联系方式进行脱敏，此工具使用了ES5中的<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="noopener">Object.defineProperty</a>方法进行实现，所以只有支持此特性的浏览器可以使用</h5><h5 id="例如"><a href="#例如" class="headerlink" title="例如"></a>例如</h5><pre><code>用户名: 李某某 ——&gt; 李*某(点击查看)
+联系方式: 15811111111 ——&gt; 15*******11(点击查看)
+</code></pre><a id="more"></a>
+<h5 id="实现js代码"><a href="#实现js代码" class="headerlink" title="实现js代码"></a>实现js代码</h5><pre><code>$(function () {
+    /**
+     * 脱敏js使用方式
+     * &lt;td class=&quot;__safe_firm_phone__&quot;&gt;phone&lt;/td&gt;
+     * &lt;span class=&quot;__safe_firm_phone__&quot;&gt;phone&lt;/span&gt;
+     *
+     */
+
+    var __safe_firm_phone__prefix = &quot;__safe_firm_phone__&quot;;
+    var __safe_firm_user_name__prefix = &quot;__safe_firm_user_name__&quot;;
+
+    function wrapperTextDom(dom, firmFunc) {
+        if ($.inArray(dom.tagName, [&quot;TD&quot;, &quot;SPAN&quot;, &quot;B&quot;]) &gt; -1) {
+            //如何动态修改值?
+            var htmlValue = $(dom).html();
+            //todo 对显示内容进行包装，使html内容改变时可以同时改变显示
+            var tmp = $(&quot;&lt;span style=&apos;cursor: pointer;&apos;&gt;&lt;/span&gt;&quot;);
+            //
+            $(dom).html(tmp);//将html替换为tmp
+            //增加get，set 特性，在set和get的时候返回正确的内容
+            Object.defineProperty(dom, &quot;innerHTML&quot;, {
+                enumerable: true,
+                configurable: true,
+                get: function () {
+                    return htmlValue;
+                },
+                set: function (v) {
+                    htmlValue = v;
+                    //修改显示
+                    tmp.attr(&quot;data-value&quot;, v).html(firmFunc(v) + &quot;(点击查看)&quot;);
+                    tmp.click(function() {
+                        this.innerHTML = this.getAttribute(&quot;data-value&quot;);
+                    });
+                }
+            });
+            //set src value
+            $(dom).html(htmlValue);
+        }
+    }
+
+
+    function firmUserName(userName) {
+        if (/^.+$/.test(userName)) {
+            return replaceStr(userName, 1, userName.length &gt; 2 ? userName.length - 1 : userName.length, &quot;*&quot;);
+        }
+        return userName;
+    }
+
+    function replaceStr(str, start, end, replaceChar) {
+        var res = &quot;&quot;;
+        var len = str.length;
+        if (len &lt;= start) {
+            return str;
+        }
+        if (len &lt; end) {
+            end = len;
+        }
+        str = str.split(&quot;&quot;);
+        for (var i = 0; i &lt; str.length; i++) {
+            var c = str[i];
+            if (i &gt; start - 1 &amp;&amp; i &lt; end) {
+                c = replaceChar;
+            }
+            res = res + c;
+        }
+        return res;
+    }
+
+    function firmPhone(phone) {
+        if (/^1[34578]\d{9}$/.test(phone)) {
+            //手机
+            return phone.substring(0, 2) + &quot;*******&quot; + phone.substring(9);
+        } else if (/^(\d{3,4}-)?\d{7,14}$/.test(phone)) {
+            //电话
+            return phone.substring(0, 6) + &quot;***&quot; + phone.substring(9);
+        }
+        return phone;
+    }
+
+    $.extend({
+        &quot;desensitize&quot;: function () {
+            //防止异常导致js执行中断
+            try {
+                $(&quot;.__safe_firm_phone__&quot;).each(function () {
+                    try {
+                        wrapperTextDom(this, firmPhone);
+                    } catch (e) {
+                        console.log(e);
+                    }
+                });
+                //do hide
+                $(&quot;.__safe_firm_user_name__&quot;).each(function () {
+                    try {
+                        wrapperTextDom(this, firmUserName);
+                    } catch (e) {
+                        console.log(e);
+                    }
+                });
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    });
+    //todo 触发脱敏方法
+    $.desensitize();
+});
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://crewor.github.io/blog/2018/07/18/js/util/ASimpleDesensitizeUtil/" data-id="cjjqi60co00006wmugvvinjwm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2018/06/26/java/utils/spring/ModifiableSpringBean/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">通过代理实现spring bean的可动态替换</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+    <section class="livere" id="comments">
+    <!-- 来必力City版安装代码 -->
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zODA5OS8xNDYyOQ==">
+    	<script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    	</script>
+    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2018/07/18/js/util/ASimpleDesensitizeUtil/">基于jquery实现的一种简易的页面脱敏工具</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/06/26/java/utils/spring/ModifiableSpringBean/">通过代理实现spring bean的可动态替换</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/06/21/java/utils/math/将数字转为汉字/">将数字转为汉字</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/06/21/question/nginx/faq/nginx_agent_faq1/">nginx反向代理重定向地址错误</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/06/20/java/utils/excel/ExcelExportUtil/">java Excel导出工具类</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 CREWOR<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+  <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
