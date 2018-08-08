@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://crewor.github.io/blog/2018/08/08/openjdk/source_dir_structure/</loc>
+    
+    <lastmod>2018-08-08T10:37:01.278Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://crewor.github.io/blog/2018/07/18/js/util/ASimpleDesensitizeUtil/</loc>
     
     <lastmod>2018-07-18T02:33:12.870Z</lastmod>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="google-site-verification" content="kCrgvlyWS5ndXM7nAKGHco11mv7Cx6vpxLq8bNZb7qo"/>
+  <meta charset="utf-8">
+  
+
+  
+  <title>OpenJDK 源码的目录结构 | CREWOR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="openjdk官网: http://openjdk.java.net/openjdk下载地址: http://download.java.net/openjdk/jdk8">
+<meta name="keywords" content="CREWOR,blog,李昆,study,学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenJDK 源码的目录结构">
+<meta property="og:url" content="https://crewor.github.io/blog/2018/08/08/openjdk/source_dir_structure/index.html">
+<meta property="og:site_name" content="CREWOR">
+<meta property="og:description" content="openjdk官网: http://openjdk.java.net/openjdk下载地址: http://download.java.net/openjdk/jdk8">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://crewor.github.io/blog/2018/08/08/openjdk/source_dir_structure/pic1.png">
+<meta property="og:updated_time" content="2018-08-08T10:37:01.278Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenJDK 源码的目录结构">
+<meta name="twitter:description" content="openjdk官网: http://openjdk.java.net/openjdk下载地址: http://download.java.net/openjdk/jdk8">
+<meta name="twitter:image" content="https://crewor.github.io/blog/2018/08/08/openjdk/source_dir_structure/pic1.png">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="CREWOR" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">CREWOR</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://crewor.github.io/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-openjdk/source_dir_structure" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2018/08/08/openjdk/source_dir_structure/" class="article-date">
+  <time datetime="2018-08-08T10:37:01.277Z" itemprop="datePublished">2018-08-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      OpenJDK 源码的目录结构
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="openjdk官网-http-openjdk-java-net"><a href="#openjdk官网-http-openjdk-java-net" class="headerlink" title="openjdk官网: http://openjdk.java.net/"></a>openjdk官网: <a href="http://openjdk.java.net/" target="_blank" rel="noopener">http://openjdk.java.net/</a></h4><h4 id="openjdk下载地址-http-download-java-net-openjdk-jdk8"><a href="#openjdk下载地址-http-download-java-net-openjdk-jdk8" class="headerlink" title="openjdk下载地址: http://download.java.net/openjdk/jdk8"></a>openjdk下载地址: <a href="http://download.java.net/openjdk/jdk8" target="_blank" rel="noopener">http://download.java.net/openjdk/jdk8</a></h4><a id="more"></a>
+<img src="/blog/2018/08/08/openjdk/source_dir_structure/pic1.png" title="源码的目录结构">
+<pre><code>一、OpenJDK 源码的目录结构
+
+    openjdk 
+    —— corba：不流行的多语言、分布式通讯接口 
+    —— hotspot：Java 虚拟机 
+    —— jaxp：XML 处理 
+    —— jaxws：一组 XML web services 的 Java API 
+    —— jdk：java 开发工具包 
+    —— —— 针对操作系统的部分 
+    —— —— share：与平台无关的实现 
+    —— langtools：Java 语言工具 
+    —— nashorn：JVM 上的 JavaScript 运行时 
+
+其中Hotspot就是我们要看的JVM包
+
+二、Hotspot的目录结构
+├─agent                            Serviceability Agent的客户端实现
+├─make                             用来build出HotSpot的各种配置文件
+├─src                              HotSpot VM的源代码
+│  ├─cpu                            CPU相关代码（汇编器、模板解释器、ad文件、部分runtime函数在这里实现）
+│  ├─os                             操作系相关代码
+│  ├─os_cpu                         操作系统+CPU的组合相关的代码
+│  └─share                          平台无关的共通代码
+│      ├─tools                        工具
+│      │  ├─hsdis                      反汇编插件
+│      │  ├─IdealGraphVisualizer       将server编译器的中间代码可视化的工具
+│      │  ├─launcher                   启动程序“java”
+│      │  ├─LogCompilation             将-XX:+LogCompilation输出的日志（hotspot.log）整理成更容易阅读的格式的工具
+│      │  └─ProjectCreator             生成Visual Studio的project文件的工具
+│      └─vm                           HotSpot VM的核心代码
+│          ├─adlc                       平台描述文件（上面的cpu或os_cpu里的*.ad文件）的编译器
+│          ├─asm                        汇编器接口
+│          ├─c1                         client编译器（又称“C1”）
+│          ├─ci                         动态编译器的公共服务/从动态编译器到VM的接口
+│          ├─classfile                  类文件的处理（包括类加载和系统符号表等）
+│          ├─code                       动态生成的代码的管理
+│          ├─compiler                   从VM调用动态编译器的接口
+│          ├─gc_implementation          GC的实现
+│          │  ├─concurrentMarkSweep      Concurrent Mark Sweep GC的实现
+│          │  ├─g1                       Garbage-First GC的实现（不使用老的分代式GC框架）
+│          │  ├─parallelScavenge         ParallelScavenge GC的实现（server VM默认，不使用老的分代式GC框架）
+│          │  ├─parNew                   ParNew GC的实现
+│          │  └─shared                   GC的共通实现
+│          ├─gc_interface               GC的接口
+│          ├─interpreter                解释器，包括“模板解释器”（官方版在用）和“C++解释器”（官方版不在用）
+│          ├─libadt                     一些抽象数据结构
+│          ├─memory                     内存管理相关（老的分代式GC框架也在这里）
+│          ├─oops                       HotSpot VM的对象系统的实现
+│          ├─opto                       server编译器（又称“C2”或“Opto”）
+│          ├─prims                      HotSpot VM的对外接口，包括部分标准库的native部分和JVMTI实现
+│          ├─runtime                    运行时支持库（包括线程管理、编译器调度、锁、反射等）
+│          ├─services                   主要是用来支持JMX之类的管理功能的接口
+│          ├─shark                      基于LLVM的JIT编译器（官方版里没有使用）
+│          └─utilities                  一些基本的工具类
+└─test                             单元测试
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://crewor.github.io/blog/2018/08/08/openjdk/source_dir_structure/" data-id="cjkkyxw440000qkmuzgy6pb0a" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2018/07/18/js/util/ASimpleDesensitizeUtil/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">基于jquery实现的一种简易的页面脱敏工具</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+    <section class="livere" id="comments">
+    <!-- 来必力City版安装代码 -->
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zODA5OS8xNDYyOQ==">
+    	<script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    	</script>
+    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2018/08/08/openjdk/source_dir_structure/">OpenJDK 源码的目录结构</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/07/18/js/util/ASimpleDesensitizeUtil/">基于jquery实现的一种简易的页面脱敏工具</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/06/26/java/utils/spring/ModifiableSpringBean/">通过代理实现spring bean的可动态替换</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/06/21/java/utils/math/将数字转为汉字/">将数字转为汉字</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/06/21/question/nginx/faq/nginx_agent_faq1/">nginx反向代理重定向地址错误</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 CREWOR<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+  <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -13,17 +13,7 @@
     <option name="MAKE_PROJECT_ON_SAVE" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="livere.ejs" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/themes/landscape/layout/_partial/comments/livere.ejs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="16" column="35" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -317,16 +307,15 @@
       <workItem from="1529402684229" duration="2246000" />
       <workItem from="1531709171755" duration="2616000" />
       <workItem from="1531719462421" duration="1677000" />
-      <workItem from="1531879908290" duration="3134000" />
+      <workItem from="1531879908290" duration="5810000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14040000" />
+    <option name="totallyTimeSpent" value="16716000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -514,8 +503,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/themes/landscape/layout/_partial/comments/livere.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="16" column="35" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+        <state relative-caret-position="200">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
