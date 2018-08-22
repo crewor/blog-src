@@ -64,6 +64,84 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-js/util/AWaterfallLoading" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2018/08/22/js/util/AWaterfallLoading/" class="article-date">
+  <time datetime="2018-08-22T05:51:51.399Z" itemprop="datePublished">2018-08-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/08/22/js/util/AWaterfallLoading/">基于jquery实现的瀑布式滚动加载工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+<pre><code>/**
+ * param1 滚动容器，例如div body 等要监听的滚动条
+ * param2 触发的加载方法
+ * param3 距离底部多少距离加载
+ **/
+function RegScrollEvent() {
+    var v = {};
+    var win = arguments[arguments.length - 3]||$(window);
+    win.mcs_scroll_var = v;
+    if (!isNaN(arguments[arguments.length - 1])) {
+        v.dest = arguments[arguments.length - 1];
+    } else {
+        v.dest = 0;
+    }
+
+    if (typeof(arguments[arguments.length - 2]) == &apos;function&apos;) {
+        var fun = arguments[arguments.length - 2];
+        v.func = fun;
+    }
+    var lastScrollTop = -1;
+    win.scroll(function (arguments) {
+        try {
+            var scrollTop = $(this).scrollTop();
+            var scrollHeight = $(document).height();
+            var windowHeight = $(this).height();
+            if (scrollTop &gt;= lastScrollTop){
+                lastScrollTop = scrollTop;
+                if (scrollTop + windowHeight &gt;= scrollHeight - v.dest) {
+                    if (typeof (v.func) == &apos;function&apos;) {
+                        v.func();
+                    }
+                }
+            } else {
+            }
+        } catch (e) {
+            console.log(e);
+        } finally {
+        }
+    });
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://crewor.github.io/blog/2018/08/22/js/util/AWaterfallLoading/" data-id="cjl4q1n1x0000lcmuiusvgnn8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-openjdk/source_dir_structure" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2018/08/08/openjdk/source_dir_structure/" class="article-date">
@@ -359,6 +437,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2018/08/22/js/util/AWaterfallLoading/">基于jquery实现的瀑布式滚动加载工具</a>
+          </li>
+        
+          <li>
             <a href="/blog/2018/08/08/openjdk/source_dir_structure/">OpenJDK 源码的目录结构</a>
           </li>
         
@@ -372,10 +454,6 @@
         
           <li>
             <a href="/blog/2018/06/21/java/utils/math/将数字转为汉字/">将数字转为汉字</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2018/06/21/question/nginx/faq/nginx_agent_faq1/">nginx反向代理重定向地址错误</a>
           </li>
         
       </ul>
