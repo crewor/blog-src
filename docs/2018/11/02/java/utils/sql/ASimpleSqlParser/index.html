@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="google-site-verification" content="kCrgvlyWS5ndXM7nAKGHco11mv7Cx6vpxLq8bNZb7qo"/>
+  <meta charset="utf-8">
+  
+
+  
+  <title>一个简单的类mybatis的xml解析sql工具 | CREWOR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="特性:1.支持ognl表达式语句条件 2.使用Map封装sql赋值参数">
+<meta name="keywords" content="CREWOR,blog,李昆,study,学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个简单的类mybatis的xml解析sql工具">
+<meta property="og:url" content="https://crewor.github.io/blog/2018/11/02/java/utils/sql/ASimpleSqlParser/index.html">
+<meta property="og:site_name" content="CREWOR">
+<meta property="og:description" content="特性:1.支持ognl表达式语句条件 2.使用Map封装sql赋值参数">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-02T10:23:34.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个简单的类mybatis的xml解析sql工具">
+<meta name="twitter:description" content="特性:1.支持ognl表达式语句条件 2.使用Map封装sql赋值参数">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="CREWOR" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">CREWOR</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://crewor.github.io/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-java/utils/sql/ASimpleSqlParser" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2018/11/02/java/utils/sql/ASimpleSqlParser/" class="article-date">
+  <time datetime="2018-11-02T10:23:34.675Z" itemprop="datePublished">2018-11-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      一个简单的类mybatis的xml解析sql工具
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="特性"><a href="#特性" class="headerlink" title="特性:"></a>特性:</h3><pre><code>1.支持ognl表达式语句条件
+2.使用Map封装sql赋值参数
+</code></pre><a id="more"></a>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code>package tag;
+
+import ognl.Ognl;
+import ognl.OgnlException;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.ByteArrayInputStream;
+import java.util.Map;
+
+/**
+ * @author:likun
+ * @email:likun18@jd.com
+ * @erp:likun101
+ * @CreateTime:2018/10/30 11:20
+ * @Project notes
+ */
+public class SqlParser {
+
+    public static String foreachNode(Node node, Object params) throws OgnlException {
+        StringBuilder sb = new StringBuilder();
+//打印该元素的文本
+        NodeList nodeList2 = node.getChildNodes();
+        for (int i = 0; i &lt; nodeList2.getLength(); i++) {
+            Node node1 = nodeList2.item(i);
+            if (node1.getNodeName().equals(&quot;#text&quot;)) {
+                sb.append(fillModel(node1.getTextContent(), params));
+            } else {
+                if (node1.getNodeName().equals(&quot;if&quot;)) {
+                    try {
+                        sb.append(IfTag.parse(node1, params));
+                    } catch (OgnlException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return sb.toString();
+    }
+
+    public static String parse(String sourceSql, Map&lt;String, Object&gt; parmas) throws Exception {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(&quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot; standalone=\&quot;no\&quot;?&gt;&quot;)
+                .append(&quot;&lt;mapper&gt;&quot;)
+                .append(sourceSql)
+                .append(&quot;&lt;/mapper&gt;&quot;);
+        //得到解析工厂DocumentBuilderFactory
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        //得到解析器DocumentBuilders
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        //解析指定的XML文档，得到代表内存DOM树的Document对象
+        Document document = builder.parse(new InputSource(new ByteArrayInputStream(sb.toString().getBytes(&quot;UTF-8&quot;))));
+        //根据标签的名称获取所有的作者元素
+        Node root = document.getFirstChild();
+        return foreachNode(root, parmas);
+    }
+
+
+    /**
+     * 对字符串填充值
+     *
+     * @param ret
+     * @param params
+     * @return
+     */
+    public static String fillModel(String ret, Object params) throws OgnlException {
+        StringBuilder retBuilder = new StringBuilder();
+        int index = 0;
+        int sublen = 0;
+        while ((index = ret.indexOf(&quot;#{&quot;, index)) &gt; -1) {
+            retBuilder.append(ret.substring(sublen, index));
+            int nextEnd = ret.indexOf(&quot;}&quot;, index);
+            String property = ret.substring(index + 2, nextEnd);
+            sublen = index = nextEnd + 1;
+            retBuilder.append(Ognl.getValue(property.trim(), params));
+        }
+        if (sublen &lt; ret.length()) {
+            retBuilder.append(ret.substring(sublen));
+        }
+        return retBuilder.toString();
+    }
+
+
+    public static class IfTag {
+        /**
+         * @param ifNode 节点
+         * @param params 参数
+         * @return
+         */
+        public static String parse(Node ifNode, Object params) throws OgnlException {
+            StringBuilder ifRet = new StringBuilder();
+//if tag ,判断条件，是否转换
+            NamedNodeMap namedNodeMap = ifNode.getAttributes();
+            Node test = namedNodeMap.getNamedItem(&quot;test&quot;);
+            String condition = test.getNodeValue();
+            Object obj = Ognl.getValue(condition, params);
+            if (Boolean.TRUE.equals(obj)) {
+                //todo 如果有嵌套标签，后面进行拓展
+                String ret = ifNode.getTextContent();
+//                ifRet.append(&quot; &quot;).append(SqlParser.fillModel(ret, params)).append(&quot; &quot;);
+                ifRet.append(&quot; &quot;).append(foreachNode(ifNode, params)).append(&quot; &quot;);
+            }
+            return ifRet.toString();
+        }
+
+
+    }
+    /**
+    ** TEST DEMO
+    **/
+    public static void testParse() throws Exception {
+            Map&lt;String, Object&gt; parmas = new HashMap&lt;String, Object&gt;() {{
+                    put("categoryStr", "100000");
+                    put("wareMode", "100000");
+                    put("out", "(CASE mrt.idCompany WHEN 6 THEN 6.0 WHEN 3 THEN 60.0 WHEN 10 THEN 60.0 ELSE NULL END)");
+                }};
+            String str = &quot;select count(0) as sumNum,mrt.idCompany as idCompany,sum(if(TIMESTAMPDIFF(MINUTE,mrt.create_time,now())&gt;#{out} ,1,0)) as outSumNum from mcs_repair_audit_task mrt join mcs_repair_order mro on mrt.r_order_id=mro.id where mrt.state=10 \n&quot; +
+                    &quot;&lt;if test=\&quot;companyStr!=null\&quot;&gt;\n&quot; +
+                    &quot;\tand mrt.idcompany=#{companyStr}\n&quot; +
+                    &quot;&lt;/if&gt;\n&quot; +
+                    &quot;&lt;if test=\&quot;categoryStr!=null\&quot;&gt;\n&quot; +
+                    &quot;\tand mrt.ware_mode=#{categoryStr}\n&quot; +
+                    &quot;&lt;/if&gt;\n&quot; +
+                    &quot;&lt;if test=\&quot;companyStr==null\&quot;&gt;\n&quot; +
+                    &quot;\tgroup by mrt.idcompany\n&quot; +
+                    &quot;&lt;/if&gt;&quot;;
+            String sql = SqlParser.parse(str, parmas);
+            System.out.println(sql);
+
+    }
+    public static void main(String[] args) throws Exception {
+        testParse();
+    }
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://crewor.github.io/blog/2018/11/02/java/utils/sql/ASimpleSqlParser/" data-id="cjnzvcgk30005x4mu4fa9qezb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2018/08/22/js/util/AWaterfallLoading/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">基于jquery实现的瀑布式滚动加载工具</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+    <section class="livere" id="comments">
+    <!-- 来必力City版安装代码 -->
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zODA5OS8xNDYyOQ==">
+    	<script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    	</script>
+    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2018/11/02/java/utils/sql/ASimpleSqlParser/">一个简单的类mybatis的xml解析sql工具</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/08/22/js/util/AWaterfallLoading/">基于jquery实现的瀑布式滚动加载工具</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/08/08/openjdk/source_dir_structure/">OpenJDK 源码的目录结构</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/07/18/js/util/ASimpleDesensitizeUtil/">基于jquery实现的一种简易的页面脱敏工具</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/06/26/java/utils/spring/ModifiableSpringBean/">通过代理实现spring bean的可动态替换</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 CREWOR<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+  <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
