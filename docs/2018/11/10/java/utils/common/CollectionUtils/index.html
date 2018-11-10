@@ -3,16 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2018/6 | CREWOR</title>
+  <title>Java 数组工具类 | CREWOR</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="CREWOR,blog,李昆,study,学习">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CREWOR">
-<meta property="og:url" content="https://crewor.github.io/blog/archives/2018/06/index.html">
+  <meta name="description" content="特性:1.支持数组分组">
+<meta name="keywords" content="CREWOR,blog,李昆,study,学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 数组工具类">
+<meta property="og:url" content="https://crewor.github.io/blog/2018/11/10/java/utils/common/CollectionUtils/index.html">
 <meta property="og:site_name" content="CREWOR">
+<meta property="og:description" content="特性:1.支持数组分组">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-10T11:59:12.096Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CREWOR">
+<meta name="twitter:title" content="Java 数组工具类">
+<meta name="twitter:description" content="特性:1.支持数组分组">
   
     <link rel="alternate" href="/blog/atom.xml" title="CREWOR" type="application/atom+xml">
   
@@ -51,7 +55,7 @@
           <li><a class=""
                  href="/blog/index.html">Home</a></li>
         
-          <li><a class="active"
+          <li><a class=""
                  href="/blog/archives/">Archives</a></li>
         
       </ul>
@@ -75,100 +79,122 @@
 
     <div class="row">
         <div class="col-sm-8 blog-main">
-          
-  
-  
+          <article id="post-java/utils/common/CollectionUtils" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
     
+  
+    <h1 class="article-title" itemprop="name">
+      Java 数组工具类
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/blog/2018/11/10/java/utils/common/CollectionUtils/" class="article-date"><time datetime="2018-11-10T11:59:12.031Z" itemprop="datePublished">2018-11-10</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="特性"><a href="#特性" class="headerlink" title="特性:"></a>特性:</h3><pre><code>1.支持数组分组
+</code></pre><a id="more"></a>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code>import java.util.*;
+
+/**
+ * 集合工具类
+ */
+public class CollectionUtils {
+
+    /**
+     * 分组接口
+     * @param &lt;K&gt;
+     * @param &lt;E&gt;
+     */
+    public interface GroupBy&lt;K,E&gt; {
+        /**
+         * 获取分组的key
+         * @param obj
+         * @return
+         */
+        K groupBy(E obj);
+    }
+
+    /**
+     * 对集合进行分组
+     * @param collection    集合
+     * @param groupBy 分组
+     * @param &lt;K&gt;   返回Map的K 类
+     * @param &lt;E&gt;   集合类型
+     * @return  分组结果
+     */
+    public static final &lt;K, E&gt; Map&lt;K, List&lt;E&gt;&gt; group(Collection&lt;E&gt; collection, GroupBy&lt;K,E&gt; groupBy) {
+        if (collection == null || collection.isEmpty()) {
+            return null;
+        }
+        if (groupBy == null) {
+            return null;
+        }
+        Iterator&lt;E&gt; iter = collection.iterator();
+        Map&lt;K, List&lt;E&gt;&gt; map = new HashMap&lt;K, List&lt;E&gt;&gt;();
+        while (iter.hasNext()) {
+            E d = iter.next();
+            K t = groupBy.groupBy(d);
+            if (map.containsKey(t)) {
+                map.get(t).add(d);
+            } else {
+                List&lt;E&gt; list = new ArrayList&lt;E&gt;();
+                list.add(d);
+                map.put(t, list);
+            }
+        }
+        return map;
+    }
+
+}
+</code></pre>
+      
+    </div>
+
     
       
+
+    
+
+    <footer class="article-footer">
+      <a data-url="https://crewor.github.io/blog/2018/11/10/java/utils/common/CollectionUtils/" data-id="cjobeecpp0000acmuqqbc2c8x" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/blog/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <header class="archive-article-header">
-    
+      
+
+    </footer>
+  </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/06/26/java/utils/spring/ModifiableSpringBean/">通过代理实现spring bean的可动态替换</a>
-    </h1>
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
   
+  <li role="presentation">
+    <a href="/blog/2018/11/02/java/utils/sql/ASimpleSqlParser/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">一个简单的类mybatis的xml解析sql工具</span>
+    </a>
+  </li>
+  
+  
+</ul>
 
 
-    <div class="article-datetime">
-  <a href="/blog/2018/06/26/java/utils/spring/ModifiableSpringBean/" class="archive-article-date"><time datetime="2018-06-26T06:13:55.928Z" itemprop="datePublished">June 26th</time></a>
-</div>
-
-  </header>
+  
 </article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <header class="archive-article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/06/21/java/utils/math/将数字转为汉字/">将数字转为汉字</a>
-    </h1>
-  
-
-
-    <div class="article-datetime">
-  <a href="/blog/2018/06/21/java/utils/math/将数字转为汉字/" class="archive-article-date"><time datetime="2018-06-21T08:14:44.271Z" itemprop="datePublished">June 21st</time></a>
-</div>
-
-  </header>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <header class="archive-article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/06/21/question/nginx/faq/nginx_agent_faq1/">nginx反向代理重定向地址错误</a>
-    </h1>
-  
-
-
-    <div class="article-datetime">
-  <a href="/blog/2018/06/21/question/nginx/faq/nginx_agent_faq1/" class="archive-article-date"><time datetime="2018-06-21T06:19:17.779Z" itemprop="datePublished">June 21st</time></a>
-</div>
-
-  </header>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <header class="archive-article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/06/20/java/utils/excel/ExcelExportUtil/">java Excel导出工具类</a>
-    </h1>
-  
-
-
-    <div class="article-datetime">
-  <a href="/blog/2018/06/20/java/utils/excel/ExcelExportUtil/" class="archive-article-date"><time datetime="2018-06-20T03:34:49.217Z" itemprop="datePublished">June 20th</time></a>
-</div>
-
-  </header>
-</article>
-
-  
-  
-    </div></section>
-  
 
 
 
