@@ -2,50 +2,36 @@
 title: Java 数组工具类
 ---
 ### 特性:
-    1.支持数组分组
+    1.group  数组分组
+    2.filter 数组过滤
 <!--more-->
 ### 代码实现
     import java.util.*;
     
     /**
-     * 集合工具类
+     * @author:likun
+     * @email:likun18@jd.com
+     * @erp:likun101
+     * @CreateTime:2018/11/10 13:40
+     * @Project las-jdams
      */
     public class CollectionUtils {
-    
-        /**
-         * 分组接口
-         * @param <K>
-         * @param <E>
-         */
-        public interface GroupBy<K,E> {
-            /**
-             * 获取分组的key
-             * @param obj
-             * @return
-             */
+        public interface GroupBy<K, E> {
             K groupBy(E obj);
         }
     
-        /**
-         * 对集合进行分组
-         * @param collection    集合
-         * @param groupBy 分组
-         * @param <K>   返回Map的K 类
-         * @param <E>   集合类型
-         * @return  分组结果
-         */
-        public static final <K, E> Map<K, List<E>> group(Collection<E> collection, GroupBy<K,E> groupBy) {
+        public static final <K, E> Map<K, List<E>> group(Collection<E> collection, GroupBy<K, E> group) {
             if (collection == null || collection.isEmpty()) {
                 return null;
             }
-            if (groupBy == null) {
+            if (group == null) {
                 return null;
             }
             Iterator<E> iter = collection.iterator();
             Map<K, List<E>> map = new HashMap<K, List<E>>();
             while (iter.hasNext()) {
                 E d = iter.next();
-                K t = groupBy.groupBy(d);
+                K t = group.groupBy(d);
                 if (map.containsKey(t)) {
                     map.get(t).add(d);
                 } else {
@@ -57,4 +43,25 @@ title: Java 数组工具类
             return map;
         }
     
+        public interface Filter<E> {
+            boolean accept(E e);
+        }
+    
+        public static final <E> List<E> filter(Collection<E> collection, Filter<E> filter) {
+            if (collection == null || collection.isEmpty()) {
+                return null;
+            }
+            if (filter == null) {
+                return new ArrayList<E>(collection);
+            }
+            Iterator<E> iter = collection.iterator();
+            List<E> res = new ArrayList<E>();
+            while (iter.hasNext()) {
+                E d = iter.next();
+                if (filter.accept(d)) {
+                    res.add(d);
+                }
+            }
+            return res;
+        }
     }

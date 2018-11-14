@@ -5,18 +5,18 @@
   
   <title>Java 数组工具类 | CREWOR</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="特性:1.支持数组分组">
+  <meta name="description" content="特性:1.group  数组分组 2.filter 数组过滤">
 <meta name="keywords" content="CREWOR,blog,李昆,study,学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java 数组工具类">
-<meta property="og:url" content="https://crewor.github.io/blog/2018/11/10/java/utils/common/CollectionUtils/index.html">
+<meta property="og:url" content="https://crewor.github.io/blog/2018/11/14/java/utils/common/CollectionUtils/index.html">
 <meta property="og:site_name" content="CREWOR">
-<meta property="og:description" content="特性:1.支持数组分组">
+<meta property="og:description" content="特性:1.group  数组分组 2.filter 数组过滤">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-10T11:59:12.096Z">
+<meta property="og:updated_time" content="2018-11-14T08:58:45.281Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 数组工具类">
-<meta name="twitter:description" content="特性:1.支持数组分组">
+<meta name="twitter:description" content="特性:1.group  数组分组 2.filter 数组过滤">
   
     <link rel="alternate" href="/blog/atom.xml" title="CREWOR" type="application/atom+xml">
   
@@ -94,7 +94,7 @@
 
   <div class="article-meta">
     <div class="article-datetime">
-  <a href="/blog/2018/11/10/java/utils/common/CollectionUtils/" class="article-date"><time datetime="2018-11-10T11:59:12.031Z" itemprop="datePublished">2018-11-10</time></a>
+  <a href="/blog/2018/11/14/java/utils/common/CollectionUtils/" class="article-date"><time datetime="2018-11-14T08:58:45.275Z" itemprop="datePublished">2018-11-14</time></a>
 </div>
 
     
@@ -105,49 +105,35 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="特性"><a href="#特性" class="headerlink" title="特性:"></a>特性:</h3><pre><code>1.支持数组分组
+        <h3 id="特性"><a href="#特性" class="headerlink" title="特性:"></a>特性:</h3><pre><code>1.group  数组分组
+2.filter 数组过滤
 </code></pre><a id="more"></a>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code>import java.util.*;
 
 /**
- * 集合工具类
+ * @author:likun
+ * @email:likun18@jd.com
+ * @erp:likun101
+ * @CreateTime:2018/11/10 13:40
+ * @Project las-jdams
  */
 public class CollectionUtils {
-
-    /**
-     * 分组接口
-     * @param &lt;K&gt;
-     * @param &lt;E&gt;
-     */
-    public interface GroupBy&lt;K,E&gt; {
-        /**
-         * 获取分组的key
-         * @param obj
-         * @return
-         */
+    public interface GroupBy&lt;K, E&gt; {
         K groupBy(E obj);
     }
 
-    /**
-     * 对集合进行分组
-     * @param collection    集合
-     * @param groupBy 分组
-     * @param &lt;K&gt;   返回Map的K 类
-     * @param &lt;E&gt;   集合类型
-     * @return  分组结果
-     */
-    public static final &lt;K, E&gt; Map&lt;K, List&lt;E&gt;&gt; group(Collection&lt;E&gt; collection, GroupBy&lt;K,E&gt; groupBy) {
+    public static final &lt;K, E&gt; Map&lt;K, List&lt;E&gt;&gt; group(Collection&lt;E&gt; collection, GroupBy&lt;K, E&gt; group) {
         if (collection == null || collection.isEmpty()) {
             return null;
         }
-        if (groupBy == null) {
+        if (group == null) {
             return null;
         }
         Iterator&lt;E&gt; iter = collection.iterator();
         Map&lt;K, List&lt;E&gt;&gt; map = new HashMap&lt;K, List&lt;E&gt;&gt;();
         while (iter.hasNext()) {
             E d = iter.next();
-            K t = groupBy.groupBy(d);
+            K t = group.groupBy(d);
             if (map.containsKey(t)) {
                 map.get(t).add(d);
             } else {
@@ -159,6 +145,27 @@ public class CollectionUtils {
         return map;
     }
 
+    public interface Filter&lt;E&gt; {
+        boolean accept(E e);
+    }
+
+    public static final &lt;E&gt; List&lt;E&gt; filter(Collection&lt;E&gt; collection, Filter&lt;E&gt; filter) {
+        if (collection == null || collection.isEmpty()) {
+            return null;
+        }
+        if (filter == null) {
+            return new ArrayList&lt;E&gt;(collection);
+        }
+        Iterator&lt;E&gt; iter = collection.iterator();
+        List&lt;E&gt; res = new ArrayList&lt;E&gt;();
+        while (iter.hasNext()) {
+            E d = iter.next();
+            if (filter.accept(d)) {
+                res.add(d);
+            }
+        }
+        return res;
+    }
 }
 </code></pre>
       
@@ -170,7 +177,7 @@ public class CollectionUtils {
     
 
     <footer class="article-footer">
-      <a data-url="https://crewor.github.io/blog/2018/11/10/java/utils/common/CollectionUtils/" data-id="cjobeecpp0000acmuqqbc2c8x" class="article-share-link">
+      <a data-url="https://crewor.github.io/blog/2018/11/14/java/utils/common/CollectionUtils/" data-id="cjobeecpp0000acmuqqbc2c8x" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -231,7 +238,7 @@ public class CollectionUtils {
     <ul class="sidebar-module-list">
       
         <li>
-          <a href="/blog/2018/11/10/java/utils/common/CollectionUtils/">Java 数组工具类</a>
+          <a href="/blog/2018/11/14/java/utils/common/CollectionUtils/">Java 数组工具类</a>
         </li>
       
         <li>
