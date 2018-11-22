@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="kCrgvlyWS5ndXM7nAKGHco11mv7Cx6vpxLq8bNZb7qo" />
+  
+  <title>将数字转为汉字 | CREWOR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="特性:1. 支持整数。 2. 支持小数。">
+<meta name="keywords" content="数字转为汉字,数字转汉字,java数字转为汉字,java数字转汉字">
+<meta property="og:type" content="article">
+<meta property="og:title" content="将数字转为汉字">
+<meta property="og:url" content="https://crewor.github.io/blog/2018/11/22/java/utils/math/将数字转为汉字/index.html">
+<meta property="og:site_name" content="CREWOR">
+<meta property="og:description" content="特性:1. 支持整数。 2. 支持小数。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-22T10:40:13.003Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="将数字转为汉字">
+<meta name="twitter:description" content="特性:1. 支持整数。 2. 支持小数。">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="CREWOR" type="application/atom+xml">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/blog/css/styles.css">
+  
+
+
+  
+  <meta name="keywords" content="数字转为汉字,数字转汉字,java数字转为汉字,java数字转汉字,CREWOR,blog,李昆,study,学习,java">
+  
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="main-menu-navbar">
+      <ul class="nav navbar-nav">
+        
+          <li><a class=""
+                 href="/blog/index.html">Home</a></li>
+        
+          <li><a class=""
+                 href="/blog/archives/">Archives</a></li>
+        
+      </ul>
+
+      <!--
+      <ul class="nav navbar-nav navbar-right">
+        
+          <li><a href="/atom.xml" title="RSS Feed"><i class="fa fa-rss"></i></a></li>
+        
+      </ul>
+      -->
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <div class="container">
+    <div class="blog-header">
+  <h1 class="blog-title">CREWOR</h1>
+  
+</div>
+
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+          <article id="post-java/utils/math/将数字转为汉字" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 class="article-title" itemprop="name">
+      将数字转为汉字
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/blog/2018/11/22/java/utils/math/将数字转为汉字/" class="article-date"><time datetime="2018-11-22T10:40:13.000Z" itemprop="datePublished">2018-11-22</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="特性"><a href="#特性" class="headerlink" title="特性:"></a>特性:</h3><pre><code>1. 支持整数。
+2. 支持小数。
+</code></pre><a id="more"></a>
+<h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a><a href="https://github.com/crewor/Notes/blob/master/util/转化类工具/将数字转为汉字/将数字转为汉字.java" target="_blank" rel="noopener">源码</a></h3><pre><code>import java.io.IOException;
+
+/**
+ * 
+ * 将正整数转为汉字描述&lt;br&gt;
+ * 如果是小数,只要从&apos;.&apos;分割,然后依次输出小数点后的值即可
+ * 
+ * @time 2017年7月24日 下午6:02:04
+ * @author likun
+ *
+ */
+public class 将数字转为汉字 {
+    /*
+     * 个 十 百 千 万 十 百 千 亿 十 百 千 万 十 百 千 万 5 9
+     */
+    final static String[] _flag_ = {&quot;负&quot;};
+    final static String[] _num_ = { &quot;零&quot;, &quot;一&quot;, &quot;二&quot;, &quot;三&quot;, &quot;四&quot;, &quot;五&quot;, &quot;六&quot;, &quot;七&quot;, &quot;八&quot;, &quot;九&quot; };
+    final static String[] _units_ = { &quot;&quot;, &quot;十&quot;, &quot;百&quot;, &quot;千&quot;, &quot;万&quot;, &quot;十&quot;, &quot;百&quot;, &quot;千&quot;, &quot;亿&quot; };
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        System.out.println(praseToChinese(&quot;-00.0001&quot;));
+    }
+    /**
+     * 将数字转为汉字
+     * @param num
+     * @return
+     */
+    public static String praseToChinese(String num) {
+        String flag = &quot;&quot;;
+        if(num.startsWith(&quot;-&quot;)){
+            flag=_flag_[0];
+            num = num.substring(1);
+        }
+        String[] ns = num.split(&quot;\\.&quot;);
+        System.out.println(String.valueOf(num)+&quot;:&quot;+ns[0]+&quot;:&quot;+ns[1]);
+        //转换整数部分
+        String left_part = praseToChinese(Long.valueOf(ns[0]));
+        //转换小数部分
+        String right_part = &quot;&quot;;
+        if (ns.length == 2 &amp;&amp; Double.valueOf(ns[1]) &gt; 0) {
+            // 如果有小数部分
+            right_part = &quot;点&quot;;
+            for (char c : ns[1].toCharArray()) {
+                right_part = right_part + _num_[c - 48];
+            }
+        }
+        return flag+ left_part + right_part;
+    }
+
+    /**
+     * 转整数部分为汉字
+     * 
+     * @param num
+     * @return
+     * @throws InterruptedException
+     */
+    public static String praseToChinese(long num) {
+        String _result_ = &quot;&quot;;
+        char[] nums = String.valueOf(num).toCharArray();
+        for (int i = nums.length - 1, j = 0, lastVal = 0; i &gt; -1; i--, j++) {
+            int n = nums[i] - 48;
+            /**
+             * 首先获取输出值,最主要的是判断0是否输出,根据下面条件逐条判断,只要一个符合则输出&lt;br&gt;
+             * 1.如果是个位数(nums长度为1),值必输出&lt;br&gt;
+             * 2.如果值不为0,值必输出&lt;br&gt;
+             * 3.如果上一个值不为0(第一个数的上一个值默认为0)并且不是(万,亿,万亿)的值必输出&lt;br&gt;
+             */
+            String val = nums.length == 1 || n != 0 || (lastVal != 0 &amp;&amp; j % 4 != 0) ? _num_[n] : &quot;&quot;;
+            /**
+             * 在获取输出单位&lt;br&gt;
+             * 1.如果值不是0，则输出单位&lt;br&gt;
+             * 2.如果是必输单位，即使值为0也输出单位【必输单位，万,亿,万亿...】&lt;br&gt;
+             * 其他为0情况不输出单位&lt;br&gt;
+             * note:由于是从 十到亿循环的，所以采用 _units_[(j-1)%8+1]来获取单位
+             */
+            String units_ = n != 0 || j % 4 == 0 ? _units_[(j - 1) % (_units_.length - 1) + 1] : &quot;&quot;;
+
+            _result_ = val + units_ + _result_;
+            lastVal = n;
+        }
+        return _result_;
+    }
+}
+</code></pre>
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="https://crewor.github.io/blog/2018/11/22/java/utils/math/将数字转为汉字/" data-id="cjnzvcgk10004x4munrr7yl6c" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
+  
+  <li role="presentation">
+    <a href="/blog/2018/11/22/js/util/ASimpleDesensitizeUtil/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">基于jquery实现的一种简易的页面脱敏工具</span>
+    </a>
+  </li>
+  
+  
+  <li role="presentation">
+    <a href="/blog/2018/11/22/java/utils/common/CollectionUtils/" id="article-nav-newer" class="article-nav-link-wrap">
+      <span class="article-nav-link-title">Java 数组工具类</span>
+      <i class="fa fa-chevron-right pull-right"></i>
+    </a>
+  </li>
+  
+</ul>
+
+
+  
+</article>
+
+
+
+
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          
+  <div class="sidebar-module sidebar-module-inset">
+  <h4>About</h4>
+  <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+
+</div>
+
+
+  
+
+
+  
+
+
+  
+
+  
+  <div class="sidebar-module">
+    <h4>Archives</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/blog/archives/2018/11/">November 2018</a><span class="sidebar-module-list-count">8</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/blog/archives/2018/08/">August 2018</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/blog/archives/2018/06/">June 2018</a><span class="sidebar-module-list-count">1</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Recents</h4>
+    <ul class="sidebar-module-list">
+      
+        <li>
+          <a href="/blog/2018/11/22/java/utils/sql/ASimpleSqlParser/">一个简单的类mybatis的xml解析sql工具</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2018/11/22/java/utils/spring/ModifiableSpringBean/">通过代理实现spring bean的可动态替换</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2018/11/22/java/utils/excel/ExcelExportUtil/">java Excel导出工具类</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2018/11/22/java/utils/common/CollectionUtils/">Java 数组工具类</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2018/11/22/java/utils/math/将数字转为汉字/">将数字转为汉字</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+
+        </div>
+    </div>
+  </div>
+  <footer class="blog-footer">
+  <div class="container">
+    <div id="footer-info" class="inner">
+      &copy; 2018 CREWOR<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+  
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha384-8gBf6Y4YYq7Jx97PIqmTwLPin4hxIzQw5aDmUg/DDhul9fFpbbLcLh3nTIIDJKhx" crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+
+<script src="/blog/js/script.js"></script>
+
+</body>
+</html>

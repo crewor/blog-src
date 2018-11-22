@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="kCrgvlyWS5ndXM7nAKGHco11mv7Cx6vpxLq8bNZb7qo" />
+  
+  <title>java Excel导出工具类 | CREWOR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="源码特性:1. 支持自动拆分为多个sheet页。 2. 支持自定义标题，内容，后置内容和3种内容的格式设置。 3. 支持获取值的格式化。">
+<meta name="keywords" content="java导出工具,导出工具,java导出,excel导出,java excel导出,java excel,java export,java excel export">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java Excel导出工具类">
+<meta property="og:url" content="https://crewor.github.io/blog/2018/11/22/java/utils/excel/ExcelExportUtil/index.html">
+<meta property="og:site_name" content="CREWOR">
+<meta property="og:description" content="源码特性:1. 支持自动拆分为多个sheet页。 2. 支持自定义标题，内容，后置内容和3种内容的格式设置。 3. 支持获取值的格式化。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://crewor.github.io/blog/2018/11/22/java/utils/excel/ExcelExportUtil/p1.png">
+<meta property="og:updated_time" content="2018-11-22T10:44:18.459Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java Excel导出工具类">
+<meta name="twitter:description" content="源码特性:1. 支持自动拆分为多个sheet页。 2. 支持自定义标题，内容，后置内容和3种内容的格式设置。 3. 支持获取值的格式化。">
+<meta name="twitter:image" content="https://crewor.github.io/blog/2018/11/22/java/utils/excel/ExcelExportUtil/p1.png">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="CREWOR" type="application/atom+xml">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/blog/css/styles.css">
+  
+
+
+  
+  <meta name="keywords" content="java导出工具,导出工具,java导出,excel导出,java excel导出,java excel,java export,java excel export,CREWOR,blog,李昆,study,学习,java">
+  
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="main-menu-navbar">
+      <ul class="nav navbar-nav">
+        
+          <li><a class=""
+                 href="/blog/index.html">Home</a></li>
+        
+          <li><a class=""
+                 href="/blog/archives/">Archives</a></li>
+        
+      </ul>
+
+      <!--
+      <ul class="nav navbar-nav navbar-right">
+        
+          <li><a href="/atom.xml" title="RSS Feed"><i class="fa fa-rss"></i></a></li>
+        
+      </ul>
+      -->
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <div class="container">
+    <div class="blog-header">
+  <h1 class="blog-title">CREWOR</h1>
+  
+</div>
+
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+          <article id="post-java/utils/excel/ExcelExportUtil" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 class="article-title" itemprop="name">
+      java Excel导出工具类
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/blog/2018/11/22/java/utils/excel/ExcelExportUtil/" class="article-date"><time datetime="2018-11-22T10:44:18.457Z" itemprop="datePublished">2018-11-22</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a><a href="https://github.com/crewor/Notes/blob/master/util/poi/ExcelUtil.java" target="_blank" rel="noopener">源码</a></h3><h3 id="特性"><a href="#特性" class="headerlink" title="特性:"></a>特性:</h3><pre><code>1. 支持自动拆分为多个sheet页。
+2. 支持自定义标题，内容，后置内容和3种内容的格式设置。
+3. 支持获取值的格式化。
+</code></pre><a id="more"></a>
+<h3 id="使用实例"><a href="#使用实例" class="headerlink" title="使用实例:"></a>使用实例:</h3><h5 id="1-截图"><a href="#1-截图" class="headerlink" title="1.截图"></a>1.截图</h5><img src="/blog/2018/11/22/java/utils/excel/ExcelExportUtil/p1.png" title="实例截图">
+<h5 id="2-实例"><a href="#2-实例" class="headerlink" title="2.实例"></a>2.实例</h5><pre><code>package excel;
+​
+import org.apache.poi.hssf.usermodel.HSSFDataFormat;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Workbook;
+​
+import java.io.FileOutputStream;
+import java.math.BigDecimal;
+import java.util.Arrays;
+​
+/**
+ * @author:likun
+ * @email:likun18@jd.com
+ * @erp:likun101
+ * @CreateTime:2018/5/16 17:25
+ * @Project notes
+ */
+public class ExcelUtilTest {
+​
+​
+    public static class Person {
+        private String name;
+        private Integer age;
+        private String phone;
+        private BigDecimal deposit;
+​
+        /**
+         * @param name    姓名
+         * @param age     年龄
+         * @param phone   电话
+         * @param deposit 存款
+         */
+        public Person(String name, Integer age, String phone, BigDecimal deposit) {
+            this.name = name;
+            this.age = age;
+            this.phone = phone;
+            this.deposit = deposit;
+        }
+​
+    }
+​
+​
+    public static void main(String[] args) {
+​
+        ExcelUtil excelUtil = new ExcelUtil();
+        excelUtil.setAllAddTitle(true);
+        excelUtil.setEverySheetCount(2048);
+        excelUtil.setSheetName(&quot;结算明细信息&quot;);
+        //创建数字格式化风格1
+        final CellStyle rightStyle1 = excelUtil.createCellStyle();
+        rightStyle1.setAlignment(HorizontalAlignment.RIGHT);
+​
+​
+        //创建数字格式化风格1
+        final CellStyle moneyStyle1 = excelUtil.createCellStyle();
+        moneyStyle1.setDataFormat(HSSFDataFormat.getBuiltinFormat(&quot;0.00&quot;));
+        moneyStyle1.setAlignment(HorizontalAlignment.RIGHT);
+        //创建粗体
+        Font boldFont1 = excelUtil.createFont();
+        boldFont1.setBold(true);
+        boldFont1.setFontHeightInPoints((short) 10);
+​
+​
+        final CellStyle titleStyle1 = excelUtil.createCellStyle();
+        titleStyle1.setAlignment(HorizontalAlignment.CENTER);
+        //粗体风格格式化
+        titleStyle1.setFont(boldFont1);
+​
+        ExcelUtil.ExcelContent.CellFormatter titleCellFormatter = (cell) -&gt; cell.setCellStyle(titleStyle1);
+        ExcelUtil.ExcelContent.CellFormatter moneyCellFormat1 = (cell) -&gt; cell.setCellStyle(moneyStyle1);
+        ExcelUtil.ExcelContent.CellFormatter righhtCellFormat = (cell) -&gt; cell.setCellStyle(rightStyle1);
+        excelUtil.setTitle(
+                new ExcelUtil.ExcelContent.CellField(&quot;序号&quot;, null, titleCellFormatter)
+                , new ExcelUtil.ExcelContent.CellField(&quot;姓名&quot;, null, titleCellFormatter)
+                , new ExcelUtil.ExcelContent.CellField(&quot;年龄&quot;, null, titleCellFormatter)
+                , new ExcelUtil.ExcelContent.CellField(&quot;电话&quot;, null, titleCellFormatter)
+                , new ExcelUtil.ExcelContent.CellField(&quot;存款&quot;, null, titleCellFormatter)
+        );
+        excelUtil.setCellWidth(2, 8, 8, 20, 6);
+        excelUtil.setRowHeight(22, 20, 20);
+​
+        ExcelUtil.ExcelContent&lt;Person&gt; content = new ExcelUtil.ExcelContent&lt;Person&gt;();
+        excelUtil.setContent(content);
+        content.setFields(
+                ExcelUtil.ExcelContent.Field.SEQUENCE,
+                new ExcelUtil.ExcelContent.Field(&quot;name&quot;, (name) -&gt; &quot;formated:&quot; + name, righhtCellFormat)
+                , new ExcelUtil.ExcelContent.Field(&quot;age&quot;, null, righhtCellFormat)
+                , new ExcelUtil.ExcelContent.Field(&quot;phone&quot;, null, righhtCellFormat)
+                , new ExcelUtil.ExcelContent.Field(&quot;deposit&quot;, (deposit) -&gt; deposit == null ? 0 : deposit, moneyCellFormat1)
+        );
+​
+​
+        content.addObjs(
+                new Person(&quot;李某&quot;, 15, &quot;15555555555&quot;, new BigDecimal(&quot;1&quot;))
+                , new Person(&quot;刘某&quot;, 15, &quot;1666666666&quot;, new BigDecimal(&quot;2&quot;))
+                , new Person(&quot;收到&quot;, 11, &quot;1777777&quot;, new BigDecimal(&quot;3&quot;))
+                , new Person(&quot;刘某&quot;, 1, &quot;18888888&quot;, new BigDecimal(&quot;4&quot;))
+                , new Person(&quot;收到&quot;, 32, &quot;1999999&quot;, new BigDecimal(&quot;5&quot;))
+                , new Person(&quot;刘某&quot;, 1231, &quot;120000000&quot;, new BigDecimal(&quot;6&quot;))
+                , new Person(&quot;收到&quot;, 2, &quot;1422000022&quot;, new BigDecimal(&quot;7&quot;))
+                , new Person(&quot;刘某&quot;, 23, &quot;18888888&quot;, new BigDecimal(&quot;8&quot;))
+                , new Person(&quot;收到&quot;, 25, &quot;18888888&quot;, new BigDecimal(&quot;9&quot;))
+        );
+​
+        excelUtil.setContent(content);
+​
+        //订单金额、数量、系数、单价、减项、加项
+        excelUtil.setTail(
+                Arrays.asList(
+                        new ExcelUtil.ExcelContent.CellField(&quot;总人数&quot;, null, titleCellFormatter)
+                        , new ExcelUtil.ExcelContent.CellField(&quot;总金额为&quot;, null, titleCellFormatter)
+                        , new ExcelUtil.ExcelContent.CellField(&quot;总纳税金额为(50%)&quot;, null, titleCellFormatter)
+                ),
+                Arrays.asList(
+                        new ExcelUtil.ExcelContent.CellField(content.getColumnNum())
+                        , new ExcelUtil.ExcelContent.CellField(content.getObjs().stream().reduce(BigDecimal.ZERO, (t, u) -&gt; t.add(u.deposit == null ? BigDecimal.ZERO : u.deposit), BigDecimal::add),null,moneyCellFormat1)
+                        , new ExcelUtil.ExcelContent.CellField(content.getObjs().stream().reduce(BigDecimal.ZERO, (t, u) -&gt; t.add(u.deposit == null ? BigDecimal.ZERO : u.deposit), BigDecimal::add), (value) -&gt; ((BigDecimal) value).multiply(new BigDecimal(&quot;0.5&quot;)),moneyCellFormat1
+                        )
+                )
+​
+        );
+​
+        Workbook workbook = excelUtil.gnnerate();
+        FileOutputStream outputStream = null;
+        try {
+            outputStream = new FileOutputStream(&quot;E://1.xls&quot;);
+            workbook.write(outputStream);
+​
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+</code></pre>
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="https://crewor.github.io/blog/2018/11/22/java/utils/excel/ExcelExportUtil/" data-id="cjnzvcgk00003x4mugjhd03tp" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
+  
+  <li role="presentation">
+    <a href="/blog/2018/11/22/java/utils/common/CollectionUtils/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">Java 数组工具类</span>
+    </a>
+  </li>
+  
+  
+  <li role="presentation">
+    <a href="/blog/2018/11/22/java/utils/spring/ModifiableSpringBean/" id="article-nav-newer" class="article-nav-link-wrap">
+      <span class="article-nav-link-title">通过代理实现spring bean的可动态替换</span>
+      <i class="fa fa-chevron-right pull-right"></i>
+    </a>
+  </li>
+  
+</ul>
+
+
+  
+</article>
+
+
+
+
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          
+  <div class="sidebar-module sidebar-module-inset">
+  <h4>About</h4>
+  <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+
+</div>
+
+
+  
+
+
+  
+
+
+  
+
+  
+  <div class="sidebar-module">
+    <h4>Archives</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/blog/archives/2018/11/">November 2018</a><span class="sidebar-module-list-count">8</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/blog/archives/2018/08/">August 2018</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/blog/archives/2018/06/">June 2018</a><span class="sidebar-module-list-count">1</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Recents</h4>
+    <ul class="sidebar-module-list">
+      
+        <li>
+          <a href="/blog/2018/11/22/java/utils/sql/ASimpleSqlParser/">一个简单的类mybatis的xml解析sql工具</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2018/11/22/java/utils/spring/ModifiableSpringBean/">通过代理实现spring bean的可动态替换</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2018/11/22/java/utils/excel/ExcelExportUtil/">java Excel导出工具类</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2018/11/22/java/utils/common/CollectionUtils/">Java 数组工具类</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2018/11/22/java/utils/math/将数字转为汉字/">将数字转为汉字</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+
+        </div>
+    </div>
+  </div>
+  <footer class="blog-footer">
+  <div class="container">
+    <div id="footer-info" class="inner">
+      &copy; 2018 CREWOR<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+  
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha384-8gBf6Y4YYq7Jx97PIqmTwLPin4hxIzQw5aDmUg/DDhul9fFpbbLcLh3nTIIDJKhx" crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+
+<script src="/blog/js/script.js"></script>
+
+</body>
+</html>

@@ -6,7 +6,7 @@
   
   <title>CREWOR</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="CREWOR,blog,李昆,study,学习">
+  <meta name="keywords" content="CREWOR,blog,李昆,study,学习,java">
 <meta property="og:type" content="website">
 <meta property="og:title" content="CREWOR">
 <meta property="og:url" content="https://crewor.github.io/blog/index.html">
@@ -29,6 +29,10 @@
   <link rel="stylesheet" href="/blog/css/styles.css">
   
 
+
+  
+  <meta name="keywords" content="CREWOR,blog,李昆,study,学习,java">
+  
 </head>
 
 <body>
@@ -78,6 +82,386 @@
         <div class="col-sm-8 blog-main">
           
   
+    <article id="post-java/utils/sql/ASimpleSqlParser" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/11/22/java/utils/sql/ASimpleSqlParser/">一个简单的类mybatis的xml解析sql工具</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/blog/2018/11/22/java/utils/sql/ASimpleSqlParser/" class="article-date"><time datetime="2018-11-22T10:44:58.686Z" itemprop="datePublished">2018-11-22</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="特性"><a href="#特性" class="headerlink" title="特性:"></a>特性:</h3><pre><code>1.支持ognl表达式语句条件
+2.使用Map封装sql赋值参数
+</code></pre>
+        
+          <p class="article-more-link">
+            <a class="btn btn-primary" href="/blog/2018/11/22/java/utils/sql/ASimpleSqlParser/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+
+    
+
+    <footer class="article-footer">
+      <a data-url="https://crewor.github.io/blog/2018/11/22/java/utils/sql/ASimpleSqlParser/" data-id="cjnzvcgk30005x4mu4fa9qezb" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-java/utils/spring/ModifiableSpringBean" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/11/22/java/utils/spring/ModifiableSpringBean/">通过代理实现spring bean的可动态替换</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/blog/2018/11/22/java/utils/spring/ModifiableSpringBean/" class="article-date"><time datetime="2018-11-22T10:44:42.248Z" itemprop="datePublished">2018-11-22</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><pre><code>    遇到这样一个问题，有一个spring容器管理的一个实例对象A,然后A在很多
+的类中都被引用了，当某一个时候，需要重新生成A对象，而不希望重新启动服务
+的时候，就可以使用代理实现spring bean的可动态替换。具体实现方法参照下
+文。
+</code></pre><h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><pre><code>1. 通过代理实现spring bean的可动态替换。
+</code></pre>
+        
+          <p class="article-more-link">
+            <a class="btn btn-primary" href="/blog/2018/11/22/java/utils/spring/ModifiableSpringBean/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+
+    
+
+    <footer class="article-footer">
+      <a data-url="https://crewor.github.io/blog/2018/11/22/java/utils/spring/ModifiableSpringBean/" data-id="cjnzvcgvi0006x4mub4y7rbra" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-java/utils/excel/ExcelExportUtil" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/11/22/java/utils/excel/ExcelExportUtil/">java Excel导出工具类</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/blog/2018/11/22/java/utils/excel/ExcelExportUtil/" class="article-date"><time datetime="2018-11-22T10:44:18.457Z" itemprop="datePublished">2018-11-22</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a><a href="https://github.com/crewor/Notes/blob/master/util/poi/ExcelUtil.java" target="_blank" rel="noopener">源码</a></h3><h3 id="特性"><a href="#特性" class="headerlink" title="特性:"></a>特性:</h3><pre><code>1. 支持自动拆分为多个sheet页。
+2. 支持自定义标题，内容，后置内容和3种内容的格式设置。
+3. 支持获取值的格式化。
+</code></pre>
+        
+          <p class="article-more-link">
+            <a class="btn btn-primary" href="/blog/2018/11/22/java/utils/excel/ExcelExportUtil/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+
+    
+
+    <footer class="article-footer">
+      <a data-url="https://crewor.github.io/blog/2018/11/22/java/utils/excel/ExcelExportUtil/" data-id="cjnzvcgk00003x4mugjhd03tp" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-java/utils/common/CollectionUtils" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/11/22/java/utils/common/CollectionUtils/">Java 数组工具类</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/blog/2018/11/22/java/utils/common/CollectionUtils/" class="article-date"><time datetime="2018-11-22T10:43:35.284Z" itemprop="datePublished">2018-11-22</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="特性"><a href="#特性" class="headerlink" title="特性:"></a>特性:</h3><pre><code>1.group  数组分组
+2.filter 数组过滤
+</code></pre>
+        
+          <p class="article-more-link">
+            <a class="btn btn-primary" href="/blog/2018/11/22/java/utils/common/CollectionUtils/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+
+    
+
+    <footer class="article-footer">
+      <a data-url="https://crewor.github.io/blog/2018/11/22/java/utils/common/CollectionUtils/" data-id="cjobeecpp0000acmuqqbc2c8x" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-java/utils/math/将数字转为汉字" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/11/22/java/utils/math/将数字转为汉字/">将数字转为汉字</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/blog/2018/11/22/java/utils/math/将数字转为汉字/" class="article-date"><time datetime="2018-11-22T10:40:13.000Z" itemprop="datePublished">2018-11-22</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="特性"><a href="#特性" class="headerlink" title="特性:"></a>特性:</h3><pre><code>1. 支持整数。
+2. 支持小数。
+</code></pre>
+        
+          <p class="article-more-link">
+            <a class="btn btn-primary" href="/blog/2018/11/22/java/utils/math/将数字转为汉字/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+
+    
+
+    <footer class="article-footer">
+      <a data-url="https://crewor.github.io/blog/2018/11/22/java/utils/math/将数字转为汉字/" data-id="cjnzvcgk10004x4munrr7yl6c" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-js/util/ASimpleDesensitizeUtil" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/11/22/js/util/ASimpleDesensitizeUtil/">基于jquery实现的一种简易的页面脱敏工具</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/blog/2018/11/22/js/util/ASimpleDesensitizeUtil/" class="article-date"><time datetime="2018-11-22T10:37:47.366Z" itemprop="datePublished">2018-11-22</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="基于实现的一种简易的页面脱敏工具-主要用来将页面明文用户名，联系方式进行脱敏，此工具使用了ES5中的方法进行实现，所以只有支持此特性的浏览器可以使用"><a href="#基于实现的一种简易的页面脱敏工具-主要用来将页面明文用户名，联系方式进行脱敏，此工具使用了ES5中的方法进行实现，所以只有支持此特性的浏览器可以使用" class="headerlink" title="基于实现的一种简易的页面脱敏工具,主要用来将页面明文用户名，联系方式进行脱敏，此工具使用了ES5中的方法进行实现，所以只有支持此特性的浏览器可以使用"></a>基于<a href="https://jquery.com" target="_blank" rel="noopener">jquery</a>实现的一种简易的页面脱敏工具,主要用来将页面明文用户名，联系方式进行脱敏，此工具使用了ES5中的<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="noopener">Object.defineProperty</a>方法进行实现，所以只有支持此特性的浏览器可以使用</h5><h5 id="例如"><a href="#例如" class="headerlink" title="例如"></a>例如</h5><pre><code>用户名: 李某某 ——&gt; 李*某(点击查看)
+联系方式: 15811111111 ——&gt; 15*******11(点击查看)
+</code></pre>
+        
+          <p class="article-more-link">
+            <a class="btn btn-primary" href="/blog/2018/11/22/js/util/ASimpleDesensitizeUtil/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+
+    
+
+    <footer class="article-footer">
+      <a data-url="https://crewor.github.io/blog/2018/11/22/js/util/ASimpleDesensitizeUtil/" data-id="cjnzvcgjt0001x4mubjvkdotw" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-js/util/AWaterfallLoading" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/11/22/js/util/AWaterfallLoading/">基于jquery实现的瀑布式滚动加载工具</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/blog/2018/11/22/js/util/AWaterfallLoading/" class="article-date"><time datetime="2018-11-22T10:37:17.512Z" itemprop="datePublished">2018-11-22</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="瀑布式滚动加载js监听工具"><a href="#瀑布式滚动加载js监听工具" class="headerlink" title="瀑布式滚动加载js监听工具"></a>瀑布式滚动加载js监听工具</h5>
+        
+          <p class="article-more-link">
+            <a class="btn btn-primary" href="/blog/2018/11/22/js/util/AWaterfallLoading/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+
+    
+
+    <footer class="article-footer">
+      <a data-url="https://crewor.github.io/blog/2018/11/22/js/util/AWaterfallLoading/" data-id="cjnzvcgjw0002x4mugqw6hud9" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-js/util/jquery-file-upload." class="article article-type-post" itemscope itemprop="blogPost">
 
   <header class="article-header">
@@ -93,7 +477,7 @@
 
   <div class="article-meta">
     <div class="article-datetime">
-  <a href="/blog/2018/11/22/js/util/jquery-file-upload./" class="article-date"><time datetime="2018-11-22T07:14:51.996Z" itemprop="datePublished">2018-11-22</time></a>
+  <a href="/blog/2018/11/22/js/util/jquery-file-upload./" class="article-date"><time datetime="2018-11-22T10:35:45.650Z" itemprop="datePublished">2018-11-22</time></a>
 </div>
 
     
@@ -119,166 +503,6 @@
 
     <footer class="article-footer">
       <a data-url="https://crewor.github.io/blog/2018/11/22/js/util/jquery-file-upload./" data-id="cjos9io5z0000sgmuoibhvutj" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java/utils/common/CollectionUtils" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/11/14/java/utils/common/CollectionUtils/">Java 数组工具类</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/blog/2018/11/14/java/utils/common/CollectionUtils/" class="article-date"><time datetime="2018-11-14T08:58:45.275Z" itemprop="datePublished">2018-11-14</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="特性"><a href="#特性" class="headerlink" title="特性:"></a>特性:</h3><pre><code>1.group  数组分组
-2.filter 数组过滤
-</code></pre>
-        
-          <p class="article-more-link">
-            <a class="btn btn-primary" href="/blog/2018/11/14/java/utils/common/CollectionUtils/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    
-
-    <footer class="article-footer">
-      <a data-url="https://crewor.github.io/blog/2018/11/14/java/utils/common/CollectionUtils/" data-id="cjobeecpp0000acmuqqbc2c8x" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java/utils/sql/ASimpleSqlParser" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/11/02/java/utils/sql/ASimpleSqlParser/">一个简单的类mybatis的xml解析sql工具</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/blog/2018/11/02/java/utils/sql/ASimpleSqlParser/" class="article-date"><time datetime="2018-11-02T10:23:34.675Z" itemprop="datePublished">2018-11-02</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="特性"><a href="#特性" class="headerlink" title="特性:"></a>特性:</h3><pre><code>1.支持ognl表达式语句条件
-2.使用Map封装sql赋值参数
-</code></pre>
-        
-          <p class="article-more-link">
-            <a class="btn btn-primary" href="/blog/2018/11/02/java/utils/sql/ASimpleSqlParser/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    
-
-    <footer class="article-footer">
-      <a data-url="https://crewor.github.io/blog/2018/11/02/java/utils/sql/ASimpleSqlParser/" data-id="cjnzvcgk30005x4mu4fa9qezb" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-js/util/AWaterfallLoading" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/08/22/js/util/AWaterfallLoading/">基于jquery实现的瀑布式滚动加载工具</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/blog/2018/08/22/js/util/AWaterfallLoading/" class="article-date"><time datetime="2018-08-22T05:58:26.931Z" itemprop="datePublished">2018-08-22</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h5 id="瀑布式滚动加载js监听工具"><a href="#瀑布式滚动加载js监听工具" class="headerlink" title="瀑布式滚动加载js监听工具"></a>瀑布式滚动加载js监听工具</h5>
-        
-          <p class="article-more-link">
-            <a class="btn btn-primary" href="/blog/2018/08/22/js/util/AWaterfallLoading/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    
-
-    <footer class="article-footer">
-      <a data-url="https://crewor.github.io/blog/2018/08/22/js/util/AWaterfallLoading/" data-id="cjnzvcgjw0002x4mugqw6hud9" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -344,171 +568,6 @@
 
 
   
-    <article id="post-js/util/ASimpleDesensitizeUtil" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/07/18/js/util/ASimpleDesensitizeUtil/">基于jquery实现的一种简易的页面脱敏工具</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/blog/2018/07/18/js/util/ASimpleDesensitizeUtil/" class="article-date"><time datetime="2018-07-18T02:33:12.328Z" itemprop="datePublished">2018-07-18</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h5 id="基于实现的一种简易的页面脱敏工具-主要用来将页面明文用户名，联系方式进行脱敏，此工具使用了ES5中的方法进行实现，所以只有支持此特性的浏览器可以使用"><a href="#基于实现的一种简易的页面脱敏工具-主要用来将页面明文用户名，联系方式进行脱敏，此工具使用了ES5中的方法进行实现，所以只有支持此特性的浏览器可以使用" class="headerlink" title="基于实现的一种简易的页面脱敏工具,主要用来将页面明文用户名，联系方式进行脱敏，此工具使用了ES5中的方法进行实现，所以只有支持此特性的浏览器可以使用"></a>基于<a href="https://jquery.com" target="_blank" rel="noopener">jquery</a>实现的一种简易的页面脱敏工具,主要用来将页面明文用户名，联系方式进行脱敏，此工具使用了ES5中的<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="noopener">Object.defineProperty</a>方法进行实现，所以只有支持此特性的浏览器可以使用</h5><h5 id="例如"><a href="#例如" class="headerlink" title="例如"></a>例如</h5><pre><code>用户名: 李某某 ——&gt; 李*某(点击查看)
-联系方式: 15811111111 ——&gt; 15*******11(点击查看)
-</code></pre>
-        
-          <p class="article-more-link">
-            <a class="btn btn-primary" href="/blog/2018/07/18/js/util/ASimpleDesensitizeUtil/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    
-
-    <footer class="article-footer">
-      <a data-url="https://crewor.github.io/blog/2018/07/18/js/util/ASimpleDesensitizeUtil/" data-id="cjnzvcgjt0001x4mubjvkdotw" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java/utils/spring/ModifiableSpringBean" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/06/26/java/utils/spring/ModifiableSpringBean/">通过代理实现spring bean的可动态替换</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/blog/2018/06/26/java/utils/spring/ModifiableSpringBean/" class="article-date"><time datetime="2018-06-26T06:13:55.928Z" itemprop="datePublished">2018-06-26</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><pre><code>    遇到这样一个问题，有一个spring容器管理的一个实例对象A,然后A在很多
-的类中都被引用了，当某一个时候，需要重新生成A对象，而不希望重新启动服务
-的时候，就可以使用代理实现spring bean的可动态替换。具体实现方法参照下
-文。
-</code></pre><h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><pre><code>1. 通过代理实现spring bean的可动态替换。
-</code></pre>
-        
-          <p class="article-more-link">
-            <a class="btn btn-primary" href="/blog/2018/06/26/java/utils/spring/ModifiableSpringBean/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    
-
-    <footer class="article-footer">
-      <a data-url="https://crewor.github.io/blog/2018/06/26/java/utils/spring/ModifiableSpringBean/" data-id="cjnzvcgvi0006x4mub4y7rbra" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-java/utils/math/将数字转为汉字" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/06/21/java/utils/math/将数字转为汉字/">将数字转为汉字</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/blog/2018/06/21/java/utils/math/将数字转为汉字/" class="article-date"><time datetime="2018-06-21T08:14:44.271Z" itemprop="datePublished">2018-06-21</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="特性"><a href="#特性" class="headerlink" title="特性:"></a>特性:</h3><pre><code>1. 支持整数。
-2. 支持小数。
-</code></pre>
-        
-          <p class="article-more-link">
-            <a class="btn btn-primary" href="/blog/2018/06/21/java/utils/math/将数字转为汉字/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    
-
-    <footer class="article-footer">
-      <a data-url="https://crewor.github.io/blog/2018/06/21/java/utils/math/将数字转为汉字/" data-id="cjnzvcgk10004x4munrr7yl6c" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
     <article id="post-question/nginx/faq/nginx_agent_faq1" class="article article-type-post" itemscope itemprop="blogPost">
 
   <header class="article-header">
@@ -561,61 +620,6 @@
 
 
   
-    <article id="post-java/utils/excel/ExcelExportUtil" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/06/20/java/utils/excel/ExcelExportUtil/">java Excel导出工具类</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/blog/2018/06/20/java/utils/excel/ExcelExportUtil/" class="article-date"><time datetime="2018-06-20T03:34:49.217Z" itemprop="datePublished">2018-06-20</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a><a href="https://github.com/crewor/Notes/blob/master/util/poi/ExcelUtil.java" target="_blank" rel="noopener">源码</a></h3><h3 id="特性"><a href="#特性" class="headerlink" title="特性:"></a>特性:</h3><pre><code>1. 支持自动拆分为多个sheet页。
-2. 支持自定义标题，内容，后置内容和3种内容的格式设置。
-3. 支持获取值的格式化。
-</code></pre>
-        
-          <p class="article-more-link">
-            <a class="btn btn-primary" href="/blog/2018/06/20/java/utils/excel/ExcelExportUtil/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    
-
-    <footer class="article-footer">
-      <a data-url="https://crewor.github.io/blog/2018/06/20/java/utils/excel/ExcelExportUtil/" data-id="cjnzvcgk00003x4mugjhd03tp" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
 
@@ -641,7 +645,7 @@
   
   <div class="sidebar-module">
     <h4>Archives</h4>
-    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/blog/archives/2018/11/">November 2018</a><span class="sidebar-module-list-count">3</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/blog/archives/2018/08/">August 2018</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/blog/archives/2018/07/">July 2018</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/blog/archives/2018/06/">June 2018</a><span class="sidebar-module-list-count">4</span></li></ul>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/blog/archives/2018/11/">November 2018</a><span class="sidebar-module-list-count">8</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/blog/archives/2018/08/">August 2018</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/blog/archives/2018/06/">June 2018</a><span class="sidebar-module-list-count">1</span></li></ul>
   </div>
 
 
@@ -652,23 +656,23 @@
     <ul class="sidebar-module-list">
       
         <li>
-          <a href="/blog/2018/11/22/js/util/jquery-file-upload./">基于jquery实现的文件上传工具</a>
+          <a href="/blog/2018/11/22/java/utils/sql/ASimpleSqlParser/">一个简单的类mybatis的xml解析sql工具</a>
         </li>
       
         <li>
-          <a href="/blog/2018/11/14/java/utils/common/CollectionUtils/">Java 数组工具类</a>
+          <a href="/blog/2018/11/22/java/utils/spring/ModifiableSpringBean/">通过代理实现spring bean的可动态替换</a>
         </li>
       
         <li>
-          <a href="/blog/2018/11/02/java/utils/sql/ASimpleSqlParser/">一个简单的类mybatis的xml解析sql工具</a>
+          <a href="/blog/2018/11/22/java/utils/excel/ExcelExportUtil/">java Excel导出工具类</a>
         </li>
       
         <li>
-          <a href="/blog/2018/08/22/js/util/AWaterfallLoading/">基于jquery实现的瀑布式滚动加载工具</a>
+          <a href="/blog/2018/11/22/java/utils/common/CollectionUtils/">Java 数组工具类</a>
         </li>
       
         <li>
-          <a href="/blog/2018/08/08/openjdk/source_dir_structure/">OpenJDK 源码的目录结构</a>
+          <a href="/blog/2018/11/22/java/utils/math/将数字转为汉字/">将数字转为汉字</a>
         </li>
       
     </ul>

@@ -1,5 +1,6 @@
 ---
 title: java Excel导出工具类
+keywords: java导出工具,导出工具,java导出,excel导出,java excel导出,java excel,java export,java excel export
 ---
 ### [源码](https://github.com/crewor/Notes/blob/master/util/poi/ExcelUtil.java)
 ### 特性:

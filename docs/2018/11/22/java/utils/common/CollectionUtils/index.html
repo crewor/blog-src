@@ -4,16 +4,20 @@
   <meta charset="utf-8">
   <meta name="google-site-verification" content="kCrgvlyWS5ndXM7nAKGHco11mv7Cx6vpxLq8bNZb7qo" />
   
-  <title>Archives: 2018/8 | CREWOR</title>
+  <title>Java 数组工具类 | CREWOR</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="CREWOR,blog,李昆,study,学习,java">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CREWOR">
-<meta property="og:url" content="https://crewor.github.io/blog/archives/2018/08/index.html">
+  <meta name="description" content="特性:1.group  数组分组 2.filter 数组过滤">
+<meta name="keywords" content="Java,java,java数组分组,java分组,java过滤,java数组过滤,数组过滤,数组分组,分组,java collection group util,java collection filter util">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 数组工具类">
+<meta property="og:url" content="https://crewor.github.io/blog/2018/11/22/java/utils/common/CollectionUtils/index.html">
 <meta property="og:site_name" content="CREWOR">
+<meta property="og:description" content="特性:1.group  数组分组 2.filter 数组过滤">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-22T10:43:35.286Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CREWOR">
+<meta name="twitter:title" content="Java 数组工具类">
+<meta name="twitter:description" content="特性:1.group  数组分组 2.filter 数组过滤">
   
     <link rel="alternate" href="/blog/atom.xml" title="CREWOR" type="application/atom+xml">
   
@@ -31,7 +35,7 @@
 
 
   
-  <meta name="keywords" content="CREWOR,blog,李昆,study,学习,java">
+  <meta name="keywords" content="Java,java,java数组分组,java分组,java过滤,java数组过滤,数组过滤,数组分组,分组,java collection group util,java collection filter util,CREWOR,blog,李昆,study,学习,java">
   
 </head>
 
@@ -56,7 +60,7 @@
           <li><a class=""
                  href="/blog/index.html">Home</a></li>
         
-          <li><a class="active"
+          <li><a class=""
                  href="/blog/archives/">Archives</a></li>
         
       </ul>
@@ -80,40 +84,136 @@
 
     <div class="row">
         <div class="col-sm-8 blog-main">
-          
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/blog/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <header class="archive-article-header">
+          <article id="post-java/utils/common/CollectionUtils" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
     
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/08/08/openjdk/source_dir_structure/">OpenJDK 源码的目录结构</a>
+    <h1 class="article-title" itemprop="name">
+      Java 数组工具类
     </h1>
   
 
 
+  </header>
+
+  <div class="article-meta">
     <div class="article-datetime">
-  <a href="/blog/2018/08/08/openjdk/source_dir_structure/" class="archive-article-date"><time datetime="2018-08-08T10:37:01.277Z" itemprop="datePublished">August 8th</time></a>
+  <a href="/blog/2018/11/22/java/utils/common/CollectionUtils/" class="article-date"><time datetime="2018-11-22T10:43:35.284Z" itemprop="datePublished">2018-11-22</time></a>
 </div>
 
-  </header>
-</article>
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="特性"><a href="#特性" class="headerlink" title="特性:"></a>特性:</h3><pre><code>1.group  数组分组
+2.filter 数组过滤
+</code></pre><a id="more"></a>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code>import java.util.*;
+
+/**
+ * @author:likun
+ * @email:likun18@jd.com
+ * @erp:likun101
+ * @CreateTime:2018/11/10 13:40
+ * @Project las-jdams
+ */
+public class CollectionUtils {
+    public interface GroupBy&lt;K, E&gt; {
+        K groupBy(E obj);
+    }
+
+    public static final &lt;K, E&gt; Map&lt;K, List&lt;E&gt;&gt; group(Collection&lt;E&gt; collection, GroupBy&lt;K, E&gt; group) {
+        if (collection == null || collection.isEmpty()) {
+            return null;
+        }
+        if (group == null) {
+            return null;
+        }
+        Iterator&lt;E&gt; iter = collection.iterator();
+        Map&lt;K, List&lt;E&gt;&gt; map = new HashMap&lt;K, List&lt;E&gt;&gt;();
+        while (iter.hasNext()) {
+            E d = iter.next();
+            K t = group.groupBy(d);
+            if (map.containsKey(t)) {
+                map.get(t).add(d);
+            } else {
+                List&lt;E&gt; list = new ArrayList&lt;E&gt;();
+                list.add(d);
+                map.put(t, list);
+            }
+        }
+        return map;
+    }
+
+    public interface Filter&lt;E&gt; {
+        boolean accept(E e);
+    }
+
+    public static final &lt;E&gt; List&lt;E&gt; filter(Collection&lt;E&gt; collection, Filter&lt;E&gt; filter) {
+        if (collection == null || collection.isEmpty()) {
+            return null;
+        }
+        if (filter == null) {
+            return new ArrayList&lt;E&gt;(collection);
+        }
+        Iterator&lt;E&gt; iter = collection.iterator();
+        List&lt;E&gt; res = new ArrayList&lt;E&gt;();
+        while (iter.hasNext()) {
+            E d = iter.next();
+            if (filter.accept(d)) {
+                res.add(d);
+            }
+        }
+        return res;
+    }
+}
+</code></pre>
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="https://crewor.github.io/blog/2018/11/22/java/utils/common/CollectionUtils/" data-id="cjobeecpp0000acmuqqbc2c8x" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
+  
+  <li role="presentation">
+    <a href="/blog/2018/11/22/java/utils/math/将数字转为汉字/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">将数字转为汉字</span>
+    </a>
+  </li>
+  
+  
+  <li role="presentation">
+    <a href="/blog/2018/11/22/java/utils/excel/ExcelExportUtil/" id="article-nav-newer" class="article-nav-link-wrap">
+      <span class="article-nav-link-title">java Excel导出工具类</span>
+      <i class="fa fa-chevron-right pull-right"></i>
+    </a>
+  </li>
+  
+</ul>
+
 
   
-  
-    </div></section>
-  
+</article>
 
 
 
