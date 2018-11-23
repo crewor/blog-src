@@ -1,6 +1,7 @@
 ---
 title: Java 数组工具类
 keywords: Java,java,java数组分组,java分组,java过滤,java数组过滤,数组过滤,数组分组,分组,java collection group util,java collection filter util
+date: 2018-11-01 12:00:00
 ---
 ### 特性:
     1.group  数组分组

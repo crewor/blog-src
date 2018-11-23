@@ -1,6 +1,7 @@
 ---
 title: 基于jquery实现的一种简易的页面脱敏工具
 keywords: 脱敏工具,脱敏,jquery脱敏工具,jquery脱敏
+date: 2018-07-29 08:05:25
 ---
 ##### 基于{% link jquery https://jquery.com %}实现的一种简易的页面脱敏工具,主要用来将页面明文用户名，联系方式进行脱敏，此工具使用了ES5中的{% link Object.defineProperty https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty %}方法进行实现，所以只有支持此特性的浏览器可以使用
 ##### 例如

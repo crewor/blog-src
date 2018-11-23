@@ -1,6 +1,7 @@
 ---
 title: 通过代理实现spring bean的可动态替换
 keywords: spring,spring容器,动态替换,spring bean动态替换,spring动态替换,spring bean modifiable
+date: 2018-07-29 12:15:20
 ---
 ### 描述
         遇到这样一个问题，有一个spring容器管理的一个实例对象A,然后A在很多

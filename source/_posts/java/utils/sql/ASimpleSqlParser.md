@@ -1,6 +1,7 @@
 ---
 title: 一个简单的类mybatis的xml解析sql工具
 keywords: sql解析工具,xml解析sql工具,xml解析sql,mybatis,sql parser,xml parser
+date: 2018-10-29 18:15:20
 ---
 ### 特性:
     1.支持ognl表达式语句条件
