@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="kCrgvlyWS5ndXM7nAKGHco11mv7Cx6vpxLq8bNZb7qo" />
+  <meta name="baidu-site-verification" content="jgx2dS1uw1" />
+  
+  <title>一个简单的类mybatis的xml解析sql工具 | CREWOR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="特性:1.支持ognl表达式语句条件 2.使用Map封装sql赋值参数">
+<meta name="keywords" content="sql解析工具,xml解析sql工具,xml解析sql,mybatis,sql parser,xml parser">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个简单的类mybatis的xml解析sql工具">
+<meta property="og:url" content="https://crewor.github.io/blog/2018/11/23/java/utils/sql/ASimpleSqlParser/index.html">
+<meta property="og:site_name" content="CREWOR">
+<meta property="og:description" content="特性:1.支持ognl表达式语句条件 2.使用Map封装sql赋值参数">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-23T10:28:32.794Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个简单的类mybatis的xml解析sql工具">
+<meta name="twitter:description" content="特性:1.支持ognl表达式语句条件 2.使用Map封装sql赋值参数">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="CREWOR" type="application/atom+xml">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/blog/css/styles.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'true', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+  
+  <meta name="keywords" content="sql解析工具,xml解析sql工具,xml解析sql,mybatis,sql parser,xml parser,CREWOR,blog,李昆,study,学习,java">
+  
+
+  
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https'){
+   bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="main-menu-navbar">
+      <ul class="nav navbar-nav">
+        
+          <li><a class=""
+                 href="/blog/index.html">Home</a></li>
+        
+          <li><a class=""
+                 href="/blog/archives/">Archives</a></li>
+        
+      </ul>
+
+      <!--
+      <ul class="nav navbar-nav navbar-right">
+        
+          <li><a href="/atom.xml" title="RSS Feed"><i class="fa fa-rss"></i></a></li>
+        
+      </ul>
+      -->
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <div class="container">
+    <div class="blog-header">
+  <h1 class="blog-title">CREWOR</h1>
+  
+</div>
+
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+          <article id="post-java/utils/sql/ASimpleSqlParser" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 class="article-title" itemprop="name">
+      一个简单的类mybatis的xml解析sql工具
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/blog/2018/11/23/java/utils/sql/ASimpleSqlParser/" class="article-date"><time datetime="2018-11-23T10:39:56.897Z" itemprop="datePublished">2018-11-23</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="特性"><a href="#特性" class="headerlink" title="特性:"></a>特性:</h3><pre><code>1.支持ognl表达式语句条件
+2.使用Map封装sql赋值参数
+</code></pre><a id="more"></a>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code>package tag;
+
+import ognl.Ognl;
+import ognl.OgnlException;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.ByteArrayInputStream;
+import java.util.Map;
+
+/**
+ * @author:likun
+ * @email:likun18@jd.com
+ * @erp:likun101
+ * @CreateTime:2018/10/30 11:20
+ * @Project notes
+ */
+public class SqlParser {
+
+    public static String foreachNode(Node node, Object params) throws OgnlException {
+        StringBuilder sb = new StringBuilder();
+//打印该元素的文本
+        NodeList nodeList2 = node.getChildNodes();
+        for (int i = 0; i &lt; nodeList2.getLength(); i++) {
+            Node node1 = nodeList2.item(i);
+            if (node1.getNodeName().equals(&quot;#text&quot;)) {
+                sb.append(fillModel(node1.getTextContent(), params));
+            } else {
+                if (node1.getNodeName().equals(&quot;if&quot;)) {
+                    try {
+                        sb.append(IfTag.parse(node1, params));
+                    } catch (OgnlException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return sb.toString();
+    }
+
+    public static String parse(String sourceSql, Map&lt;String, Object&gt; parmas) throws Exception {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(&quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot; standalone=\&quot;no\&quot;?&gt;&quot;)
+                .append(&quot;&lt;mapper&gt;&quot;)
+                .append(sourceSql)
+                .append(&quot;&lt;/mapper&gt;&quot;);
+        //得到解析工厂DocumentBuilderFactory
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        //得到解析器DocumentBuilders
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        //解析指定的XML文档，得到代表内存DOM树的Document对象
+        Document document = builder.parse(new InputSource(new ByteArrayInputStream(sb.toString().getBytes(&quot;UTF-8&quot;))));
+        //根据标签的名称获取所有的作者元素
+        Node root = document.getFirstChild();
+        return foreachNode(root, parmas);
+    }
+
+
+    /**
+     * 对字符串填充值
+     *
+     * @param ret
+     * @param params
+     * @return
+     */
+    public static String fillModel(String ret, Object params) throws OgnlException {
+        StringBuilder retBuilder = new StringBuilder();
+        int index = 0;
+        int sublen = 0;
+        while ((index = ret.indexOf(&quot;#{&quot;, index)) &gt; -1) {
+            retBuilder.append(ret.substring(sublen, index));
+            int nextEnd = ret.indexOf(&quot;}&quot;, index);
+            String property = ret.substring(index + 2, nextEnd);
+            sublen = index = nextEnd + 1;
+            retBuilder.append(Ognl.getValue(property.trim(), params));
+        }
+        if (sublen &lt; ret.length()) {
+            retBuilder.append(ret.substring(sublen));
+        }
+        return retBuilder.toString();
+    }
+
+
+    public static class IfTag {
+        /**
+         * @param ifNode 节点
+         * @param params 参数
+         * @return
+         */
+        public static String parse(Node ifNode, Object params) throws OgnlException {
+            StringBuilder ifRet = new StringBuilder();
+//if tag ,判断条件，是否转换
+            NamedNodeMap namedNodeMap = ifNode.getAttributes();
+            Node test = namedNodeMap.getNamedItem(&quot;test&quot;);
+            String condition = test.getNodeValue();
+            Object obj = Ognl.getValue(condition, params);
+            if (Boolean.TRUE.equals(obj)) {
+                //todo 如果有嵌套标签，后面进行拓展
+                String ret = ifNode.getTextContent();
+//                ifRet.append(&quot; &quot;).append(SqlParser.fillModel(ret, params)).append(&quot; &quot;);
+                ifRet.append(&quot; &quot;).append(foreachNode(ifNode, params)).append(&quot; &quot;);
+            }
+            return ifRet.toString();
+        }
+
+
+    }
+    /**
+    ** TEST DEMO
+    **/
+    public static void testParse() throws Exception {
+            Map&lt;String, Object&gt; parmas = new HashMap&lt;String, Object&gt;() {{
+                    put("categoryStr", "100000");
+                    put("wareMode", "100000");
+                    put("out", "(CASE mrt.idCompany WHEN 6 THEN 6.0 WHEN 3 THEN 60.0 WHEN 10 THEN 60.0 ELSE NULL END)");
+                }};
+            String str = &quot;select count(0) as sumNum,mrt.idCompany as idCompany,sum(if(TIMESTAMPDIFF(MINUTE,mrt.create_time,now())&gt;#{out} ,1,0)) as outSumNum from mcs_repair_audit_task mrt join mcs_repair_order mro on mrt.r_order_id=mro.id where mrt.state=10 \n&quot; +
+                    &quot;&lt;if test=\&quot;companyStr!=null\&quot;&gt;\n&quot; +
+                    &quot;\tand mrt.idcompany=#{companyStr}\n&quot; +
+                    &quot;&lt;/if&gt;\n&quot; +
+                    &quot;&lt;if test=\&quot;categoryStr!=null\&quot;&gt;\n&quot; +
+                    &quot;\tand mrt.ware_mode=#{categoryStr}\n&quot; +
+                    &quot;&lt;/if&gt;\n&quot; +
+                    &quot;&lt;if test=\&quot;companyStr==null\&quot;&gt;\n&quot; +
+                    &quot;\tgroup by mrt.idcompany\n&quot; +
+                    &quot;&lt;/if&gt;&quot;;
+            String sql = SqlParser.parse(str, parmas);
+            System.out.println(sql);
+
+    }
+    public static void main(String[] args) throws Exception {
+        testParse();
+    }
+}
+</code></pre>
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="https://crewor.github.io/blog/2018/11/23/java/utils/sql/ASimpleSqlParser/" data-id="cjotwq5ts0009komuu2pcbie7" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
+  
+  <li role="presentation">
+    <a href="/blog/2018/11/23/js/util/ASimpleDesensitizeUtil/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">基于jquery实现的一种简易的页面脱敏工具</span>
+    </a>
+  </li>
+  
+  
+  <li role="presentation">
+    <a href="/blog/2018/11/23/java/utils/math/将数字转为汉字/" id="article-nav-newer" class="article-nav-link-wrap">
+      <span class="article-nav-link-title">将数字转为汉字</span>
+      <i class="fa fa-chevron-right pull-right"></i>
+    </a>
+  </li>
+  
+</ul>
+
+
+  
+</article>
+
+
+
+
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          
+  <div class="sidebar-module sidebar-module-inset">
+  <h4>About</h4>
+  <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+
+</div>
+
+
+  
+
+
+  
+
+
+  
+
+  
+  <div class="sidebar-module">
+    <h4>Archives</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/blog/archives/2018/11/">November 2018</a><span class="sidebar-module-list-count">10</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Recents</h4>
+    <ul class="sidebar-module-list">
+      
+        <li>
+          <a href="/blog/2018/11/23/question/nginx/faq/nginx_agent_faq1/">nginx反向代理重定向地址错误</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2018/11/23/openjdk/source_dir_structure/">OpenJDK 源码的目录结构</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2018/11/23/java/utils/spring/ModifiableSpringBean/">通过代理实现spring bean的可动态替换</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2018/11/23/java/utils/common/CollectionUtils/">Java 数组工具类</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2018/11/23/java/utils/excel/ExcelExportUtil/">java Excel导出工具类</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+
+        </div>
+    </div>
+  </div>
+  <footer class="blog-footer">
+  <div class="container">
+    <div id="footer-info" class="inner">
+      &copy; 2018 CREWOR<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+  
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha384-8gBf6Y4YYq7Jx97PIqmTwLPin4hxIzQw5aDmUg/DDhul9fFpbbLcLh3nTIIDJKhx" crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+
+<script src="/blog/js/script.js"></script>
+
+</body>
+</html>
