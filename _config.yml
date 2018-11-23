@@ -78,8 +78,11 @@ theme: bootstrap-blog
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repo: git@git.coding.net:crewor/crewor.git
+- type: git
+  repo: git@git.coding.net:crewor/blog.git
+  branch: master
+- type: git
+  repo: git@github.com:crewor/blog.git
   branch: master
 
 sitemap:
