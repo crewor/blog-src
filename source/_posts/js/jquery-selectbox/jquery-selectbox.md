@@ -14,6 +14,7 @@ date: 2019-01-16 16:05:25
            2.销毁，wrapperSelect.destroy();
         })
 <!--more-->
+{% link demo https://crewor.github.io/sources/docs/jquery/extends/selectbox/selectbox.html %}
 ##### 实现代码
     js
         (function ($) {
