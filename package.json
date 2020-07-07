@@ -20,6 +20,6 @@
     "hexo-server": "^0.2.2",
     "hexo-tag-bootstrap": "^0.1.2",
     "hexo-tag-fontawesome": "^1.0.0",
-    "npm": "^6.9.0"
+    "npm": "^6.14.6"
   }
 }
